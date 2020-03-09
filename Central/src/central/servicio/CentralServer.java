@@ -158,7 +158,7 @@ public class CentralServer implements Runnable {
             case "consultarCiudadanoVehiculo":
                 String idclive = parametros[1];
                 ClienteVehiculo clive = gestorClivehiculo.buscarClienteVehiculoPorId(idclive);
-                System.out.println(clive.toString());
+                //System.out.println(clive.toString());
                 if (clive == null) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
@@ -213,7 +213,7 @@ public class CentralServer implements Runnable {
                 String idclives = parametros[1];
                 ArrayList<ClienteVehiculo> clives = gestorClivehiculo.buscarClientesVehiculosPorId(idclives);
                 System.out.println(clives.toString());
-                if (clives == null) {
+                if (clives.isEmpty()) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
                     System.out.println(parseToJSON(clives));

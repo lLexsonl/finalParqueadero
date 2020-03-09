@@ -470,60 +470,59 @@ public class GuiPrincipal extends javax.swing.JFrame implements AView {
         String id = txtId.getText().trim();
         GestorClienteVehiculo gestor2 = new GestorClienteVehiculo();
         GestorClientes gestor = new GestorClientes();
-        
+
         //VALIDACION DE QUE EL CAMPO DEL ID NO SEA VACIO 
         if (id.equals("")) {
             return;
         }
-        Cliente cli=null;
+        Cliente cli = null;
         List<ClienteVehiculo> clivelocal = null;
         ClienteVehiculo clive = null;
         List<ClienteVehiculo> list = null;
-        
+
         // SE HACE LA BUSQUEDA INICIALMENTE EN LA BD LOCAL
         try {
-        clivelocal = gestor.consultarVehiCliente(id);
-        
-        //SI EL CLIENTE BUSCADO EN LA BD LOCAL ES NULL SE PROCEDE A BUSCARLO EN LA BD CENTRAL
+            clivelocal = gestor.consultarVehiCliente(id);
+
+            //SI EL CLIENTE BUSCADO EN LA BD LOCAL ES NULL SE PROCEDE A BUSCARLO EN LA BD CENTRAL
             if (clivelocal.isEmpty()) {
-            
-                  
-            if(jRadioButton1.isSelected()){
-            //BUSQUEDA POR IDCLIENTE
-            cli = gestor.buscarClienteCentral(id);
-            
-            //SI EL CLIENTE SE ENCUENTRA EN LA BASE DE DATOS SE PROCEDE A VERIFICAR SI HAY UN CLIENTEVEHICULO
-            clive=gestor2.buscarClienteVehiculoEnCentral(id);
-            }
-            
-            else if(jRadioButton2.isSelected()){
-                //BUSQUEDA POR CODIGOCLIENTE FALTA POR HACER
-                cli = gestor.buscarClienteCentral(id);
-                //SI EL CLIENTE SE ENCUENTRA EN LA BASE DE DATOS SE PROCEDE A VERIFICAR SI HAY UN CLIENTEVEHICULO
-                clive=gestor2.buscarClienteVehiculoEnCentral(id);  
-            }
-            
-            //VERIFICACION DE QUE SI EXITE EL CLIENTEVEHICULO
-            if(clive!=null){
-                //ENCONTRADO EN LA CENTRAL
-                
-                ClienteVehiculo[] lista=gestor2.buscarClientesVehiculosEnCentral(id);
-                fijarCamposTabla2(lista);
-               //fijarCamposTabla(clive);
-                accion = "EDITAR";
-                btnIngresar.setEnabled(true);
-                btnRetirar.setEnabled(true); 
-            }
-            else{
-                Utilidades.mensajeError("El cliente no tiene vehiculo asociado", "Error");
-            }
 
-                
+                if (jRadioButton1.isSelected()) {
+                    //BUSQUEDA POR IDCLIENTE
+                    cli = gestor.buscarClienteCentral(id);
 
-            }
-            else{
-               //SI ENTRA EN ESTE CONDICIONAL ES POR QUE EL CLIENTE EN LA BD LOCAL NO ES NULL
-               //ENCONTRADO EN LA LOCAL
+                    //SI EL CLIENTE SE ENCUENTRA EN LA BASE DE DATOS SE PROCEDE A VERIFICAR SI HAY UN CLIENTEVEHICULO
+                    clive = gestor2.buscarClienteVehiculoEnCentral(id);
+                } else if (jRadioButton2.isSelected()) {
+                    //BUSQUEDA POR CODIGOCLIENTE FALTA POR HACER
+                    cli = gestor.buscarClienteCentral(id);
+                    //SI EL CLIENTE SE ENCUENTRA EN LA BASE DE DATOS SE PROCEDE A VERIFICAR SI HAY UN CLIENTEVEHICULO
+                    clive = gestor2.buscarClienteVehiculoEnCentral(id);
+                } else {
+                    Utilidades.mensajeError("No ha seleccionado el tipo de documento", "Buscar Cliente");
+                    return;
+                }
+
+                //VERIFICACION DE QUE SI EXITE EL CLIENTEVEHICULO
+                if (clive != null) {
+                    //ENCONTRADO EN LA CENTRAL
+
+                    ClienteVehiculo[] lista = gestor2.buscarClientesVehiculosEnCentral(id);
+                    fijarCamposTabla2(lista);
+                    //fijarCamposTabla(clive);
+                    accion = "EDITAR";
+                    btnIngresar.setEnabled(true);
+                    btnRetirar.setEnabled(true);
+                } else {
+                    if(cli != null)
+                        Utilidades.mensajeError("El cliente NO tiene vehiculo asociado", "Error");
+                    else
+                        Utilidades.mensajeError("El cliente NO existe", "Error");
+                }
+
+            } else {
+                //SI ENTRA EN ESTE CONDICIONAL ES POR QUE EL CLIENTE EN LA BD LOCAL NO ES NULL
+                //ENCONTRADO EN LA LOCAL
                 fijarCamposTabla(clivelocal);
             }
 
@@ -693,13 +692,14 @@ public class GuiPrincipal extends javax.swing.JFrame implements AView {
         model.addRow(rowData);
 
     }
-private void fijarCamposTabla2(ClienteVehiculo[] list) {
+
+    private void fijarCamposTabla2(ClienteVehiculo[] list) {
 
         this.inicializarTabla();
         DefaultTableModel model = (DefaultTableModel) tblIngresoRetirar.getModel();
 
         Object rowData[] = new Object[7];
-        for(int i=0;i<list.length;i++){
+        for (int i = 0; i < list.length; i++) {
             rowData[0] = list[i].getIdCliente();
             rowData[1] = list[i].getNombre();
             rowData[2] = list[i].getApellido();
@@ -709,13 +709,14 @@ private void fijarCamposTabla2(ClienteVehiculo[] list) {
             model.addRow(rowData);
         }
     }
+
     private void fijarCamposTabla(List<ClienteVehiculo> list) {
 
         this.inicializarTabla2();
         DefaultTableModel model = (DefaultTableModel) tblIngresoRetirar.getModel();
 
         Object rowData[] = new Object[7];
-        
+
         for (ClienteVehiculo clive : list) {
             rowData[0] = clive.getIdCliente();
             rowData[1] = clive.getNombre();
@@ -732,7 +733,7 @@ private void fijarCamposTabla2(ClienteVehiculo[] list) {
         tblIngresoRetirar.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Id", "Nombres", "Apellidos", "IdVehiculo","Placa","Tipo"}
+                    "Id", "Nombres", "Apellidos", "IdVehiculo", "Placa", "Tipo"}
         ));
     }
 
@@ -741,7 +742,7 @@ private void fijarCamposTabla2(ClienteVehiculo[] list) {
         tblIngresoRetirar.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Id", "Nombres", "Apellidos","Placa","Tipo"}
+                    "Id", "Nombres", "Apellidos", "Placa", "Tipo"}
         ));
     }
 
@@ -757,23 +758,22 @@ private void fijarCamposTabla2(ClienteVehiculo[] list) {
 //        txtEmail.setText("");
 
     }
-    
-    private void fijarCamposTabla(ClienteVehiculo clive){
+
+    private void fijarCamposTabla(ClienteVehiculo clive) {
         this.inicializarTabla();
         DefaultTableModel model = (DefaultTableModel) tblIngresoRetirar.getModel();
 
         Object rowData[] = new Object[7];
-        
-            rowData[0] = clive.getIdCliente();
-            rowData[1] = clive.getNombre();
-            rowData[2] = clive.getApellido();
-            rowData[3] = clive.getIdvehiculo();
-            rowData[4] = clive.getNodeplaca();
-            rowData[5] = clive.getTipoVehiculo();
-            
-            model.addRow(rowData);
-        
-        
+
+        rowData[0] = clive.getIdCliente();
+        rowData[1] = clive.getNombre();
+        rowData[2] = clive.getApellido();
+        rowData[3] = clive.getIdvehiculo();
+        rowData[4] = clive.getNodeplaca();
+        rowData[5] = clive.getTipoVehiculo();
+
+        model.addRow(rowData);
+
     }
 
 

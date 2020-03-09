@@ -19,7 +19,7 @@ public class ConectorJdbcVigilante {
     private Connection cn;
     private ResultSet rs;
     private Statement st;
-    private final String URL = "jdbc:hsqldb:file:C:\\Users\\Yerson\\Downloads\\Segunda Entrega Parqueadero\\Central\\bd\\vigilante;hsqldb.lock_file=false";
+    private final String URL = "jdbc:hsqldb:file:C:\\Users\\Yerson\\Java\\Segunda Entrega Parqueadero\\Central\\bd\\vigilante;hsqldb.lock_file=false";
     
     private final String USER = "sa";
     private final String PASSWORD = "123";
