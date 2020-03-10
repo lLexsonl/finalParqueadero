@@ -23,12 +23,12 @@ import parqueadero.negocio.Ingreso;
 public class GUIClientesController extends AActionController {
 
     private final GestorClientes gestor; // Modelo
-    private final GuiPrincipal vista; //Vista
+    private final GUIPrincipal vista; //Vista
 
     public GUIClientesController(AModel myModel, AView myView) {
         super(myModel, myView);
         this.gestor = (GestorClientes) myModel;
-        this.vista = (GuiPrincipal) myView;
+        this.vista = (GUIPrincipal) myView;
     }
 
     /**

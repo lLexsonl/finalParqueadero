@@ -23,11 +23,11 @@ import parqueadero.utils.Utilidades;
  *
  * @author Adrian
  */
-public class GuiPrincipal extends javax.swing.JFrame implements AView {
+public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
     private String accion;
 
-    public GuiPrincipal() {
+    public GUIPrincipal() {
         initComponents();
 
         super.setSize(770, 650);
@@ -527,7 +527,7 @@ public class GuiPrincipal extends javax.swing.JFrame implements AView {
             }
 
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(GuiPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             Utilidades.mensajeError("Error al buscar el cliente en la base de datos local del parqueadero", "Atención");
         }
 
@@ -883,7 +883,7 @@ public class GuiPrincipal extends javax.swing.JFrame implements AView {
             ArrayList<Cliente> listado = gestor.consultarClientes();
             llenarTabla(listado);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(GuiPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             Utilidades.mensajeError("Error al consultar clientes", "Atención");
         }
     }

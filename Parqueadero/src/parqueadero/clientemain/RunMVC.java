@@ -5,7 +5,7 @@ import parqueadero.acceso.IFabricaServicioCentral;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.presentacion.GUIClientesController;
 import parqueadero.presentacion.GUIMapaParqueadero;
-import parqueadero.presentacion.GuiPrincipal;
+import parqueadero.presentacion.GUIPrincipal;
 
 /**
  * Es el pegamento de la aplición
@@ -19,7 +19,7 @@ public class RunMVC {
         GestorClientes gestor = new GestorClientes(fabricaCentral);
         
         //PRIMERA VISTA
-        GuiPrincipal view1 = new GuiPrincipal();
+        GUIPrincipal view1 = new GUIPrincipal();
         gestor.addView(view1);
         GUIClientesController control = new GUIClientesController(gestor, view1);
         view1.setVisible(true);
