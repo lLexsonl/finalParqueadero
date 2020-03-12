@@ -320,4 +320,10 @@ public class Utilidades {
         LocalDateTime now = LocalDateTime.now();
         return format.format(now);
     }
+    
+    public static String fechaAcualConFormato() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        return format.format(now);
+    }
 }

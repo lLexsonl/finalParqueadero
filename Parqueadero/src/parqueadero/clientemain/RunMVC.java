@@ -45,6 +45,9 @@ public class RunMVC {
 
         view1.getBtnRetirar().addActionListener(control);
         view1.getBtnRetirar().setActionCommand("RETIRAR");
+        
+        view1.getBtnMultar().addActionListener(control);
+        view1.getBtnMultar().setActionCommand("MULTAR");
     }
 }
 

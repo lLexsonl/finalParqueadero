@@ -129,6 +129,20 @@ public class GUIClientesController extends AActionController {
                     break;
                 }
                 //</editor-fold>
+            case "MULTAR":
+                System.out.println("Estoy en multar");
+                
+                String placa, des, url, fecha;
+                
+                placa = vista.getTxt_placa_mul();
+                des = vista.getTxt_des_mul();
+                url = vista.getTxt_url_multa();
+                fecha = Utilidades.fechaAcualConFormato();
+                
+                gestor.crearMulta(placa, des, url, fecha);
+                
+                //gestor.insertarMulta(placa, des, url, fecha);
+                break;
         }
     }
 

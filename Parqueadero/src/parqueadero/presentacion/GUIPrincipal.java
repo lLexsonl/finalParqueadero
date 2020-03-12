@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import mvcf.AModel;
 import mvcf.AView;
@@ -36,7 +37,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         inicializarTabla2();
         //fijarMensajeExplicacion();
 
-        botonesEstadoInicial();
+        this.botonesEstadoInicial();
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
 
@@ -122,13 +123,14 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jButton5 = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
         jPanel29 = new javax.swing.JPanel();
+        jPanel31 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtIdClienteJoin = new javax.swing.JTextField();
-        jPanel31 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtPlacaJoin = new javax.swing.JTextField();
+        jPanel33 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -136,6 +138,20 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jPanel12 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
+        jPanel32 = new javax.swing.JPanel();
+        jPanel34 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel35 = new javax.swing.JPanel();
+        lbl_placa_mul = new javax.swing.JLabel();
+        txt_placa_mul = new javax.swing.JTextField();
+        lbl_des_multa = new javax.swing.JLabel();
+        txt_des_mul = new javax.swing.JTextField();
+        lbl_url_multa = new javax.swing.JLabel();
+        txt_url_multa = new javax.swing.JTextField();
+        lbl_fecha_mul = new javax.swing.JLabel();
+        calendar_multa = new com.toedter.calendar.JCalendar();
+        jPanel36 = new javax.swing.JPanel();
+        btn_multa = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -159,15 +175,15 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jRadioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel5.add(jRadioButton1);
 
-        jRadioButton2.setText("Busqueda por codigo");
+        jRadioButton2.setText("Busqueda por código");
         jRadioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel5.add(jRadioButton2);
 
         jPanel3.add(jPanel5);
 
-        jPanel6.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel6.setLayout(new java.awt.GridLayout());
 
-        jLabel2.setText("Numero de identificacion:");
+        jLabel2.setText("Numero de identificación:");
         jPanel6.add(jLabel2);
         jPanel6.add(txtId);
 
@@ -232,7 +248,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel2.add(jPanel4);
 
-        jTabbedPane1.addTab("Gestion Parqueadero", jPanel2);
+        jTabbedPane1.addTab("Gestión Parqueadero", jPanel2);
 
         jPanel9.setLayout(new java.awt.GridLayout(4, 0));
 
@@ -302,10 +318,10 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel21.add(jPanel17);
 
-        jPanel18.setLayout(new java.awt.GridLayout(1, 0));
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
         jButton3.setText("Registrar");
+        jButton3.setMinimumSize(new java.awt.Dimension(20, 7));
+        jButton3.setPreferredSize(new java.awt.Dimension(150, 50));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -317,7 +333,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel9.add(jPanel21);
 
-        jTabbedPane1.addTab("Gestion Usuarios", jPanel9);
+        jTabbedPane1.addTab("Gestión Usuarios", jPanel9);
 
         jPanel22.setLayout(new java.awt.GridLayout(5, 0));
 
@@ -325,7 +341,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Gestion Vehiculos");
+        jLabel9.setText("Gestión Vehiculos");
         jPanel23.add(jLabel9);
 
         jPanel22.add(jPanel23);
@@ -356,10 +372,11 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel22.add(jPanel26);
 
-        jPanel27.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
         jButton5.setText("Registrar");
+        jButton5.setPreferredSize(new java.awt.Dimension(150, 50));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -369,41 +386,45 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel22.add(jPanel27);
 
-        jTabbedPane1.addTab("Gestion Vehiculos", jPanel22);
+        jTabbedPane1.addTab("Gestión Vehiculos", jPanel22);
 
-        jPanel28.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel28.setLayout(new java.awt.GridLayout());
 
-        jPanel29.setLayout(new java.awt.GridLayout(4, 0));
+        jPanel29.setLayout(new java.awt.BorderLayout(0, 50));
+
+        jPanel31.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Gestion Asociacion");
-        jPanel29.add(jLabel15);
+        jLabel15.setText("Gestión Asociación");
+        jPanel31.add(jLabel15);
 
-        jPanel30.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel29.add(jPanel31, java.awt.BorderLayout.NORTH);
+
+        jPanel30.setLayout(new java.awt.GridLayout(2, 2, 0, 80));
 
         jLabel14.setText("Numero de identificacion:");
         jPanel30.add(jLabel14);
         jPanel30.add(txtIdClienteJoin);
 
-        jPanel29.add(jPanel30);
-
-        jPanel31.setLayout(new java.awt.GridLayout(1, 0));
-
         jLabel13.setText("Placa de Vehiculo:");
-        jPanel31.add(jLabel13);
-        jPanel31.add(txtPlacaJoin);
+        jPanel30.add(jLabel13);
+        jPanel30.add(txtPlacaJoin);
 
-        jPanel29.add(jPanel31);
+        jPanel29.add(jPanel30, java.awt.BorderLayout.CENTER);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
-        jButton6.setText("Realizar Asociacion");
+        jButton6.setText("Realizar Asociación");
+        jButton6.setMinimumSize(new java.awt.Dimension(20, 7));
+        jButton6.setPreferredSize(new java.awt.Dimension(250, 50));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel29.add(jButton6);
+        jPanel33.add(jButton6);
+
+        jPanel29.add(jPanel33, java.awt.BorderLayout.SOUTH);
 
         jPanel28.add(jPanel29);
 
@@ -445,6 +466,55 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jTabbedPane1.addTab("Base de Datos Local", jPanel1);
 
+        jPanel32.setLayout(new java.awt.BorderLayout());
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel17.setText("Gestión de Multas");
+        jLabel17.setToolTipText("");
+        jPanel34.add(jLabel17);
+
+        jPanel32.add(jPanel34, java.awt.BorderLayout.NORTH);
+
+        jPanel35.setLayout(new java.awt.GridLayout(4, 2, 0, 5));
+
+        lbl_placa_mul.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_placa_mul.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbl_placa_mul.setText("Placa:");
+        jPanel35.add(lbl_placa_mul);
+
+        txt_placa_mul.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel35.add(txt_placa_mul);
+
+        lbl_des_multa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_des_multa.setText("Descripción:");
+        jPanel35.add(lbl_des_multa);
+
+        txt_des_mul.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel35.add(txt_des_mul);
+
+        lbl_url_multa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_url_multa.setText("URL Foto:");
+        jPanel35.add(lbl_url_multa);
+
+        txt_url_multa.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel35.add(txt_url_multa);
+
+        lbl_fecha_mul.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_fecha_mul.setText("Fecha:");
+        jPanel35.add(lbl_fecha_mul);
+        jPanel35.add(calendar_multa);
+
+        jPanel32.add(jPanel35, java.awt.BorderLayout.CENTER);
+
+        btn_multa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_multa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/agregar.png"))); // NOI18N
+        btn_multa.setText("Multar");
+        jPanel36.add(btn_multa);
+
+        jPanel32.add(jPanel36, java.awt.BorderLayout.PAGE_END);
+
+        jTabbedPane1.addTab("Gestión de Multas", jPanel32);
+
         getContentPane().add(jTabbedPane1);
 
         jMenu1.setText("Configuracion");
@@ -467,6 +537,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        this.inicializarTabla();
         String id = txtId.getText().trim();
         GestorClienteVehiculo gestor2 = new GestorClienteVehiculo();
         GestorClientes gestor = new GestorClientes();
@@ -514,16 +585,19 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
                     btnIngresar.setEnabled(true);
                     btnRetirar.setEnabled(true);
                 } else {
-                    if(cli != null)
+                    if (cli != null) {
                         Utilidades.mensajeError("El cliente NO tiene vehiculo asociado", "Error");
-                    else
+                    } else {
                         Utilidades.mensajeError("El cliente NO existe", "Error");
+                    }
                 }
 
             } else {
                 //SI ENTRA EN ESTE CONDICIONAL ES POR QUE EL CLIENTE EN LA BD LOCAL NO ES NULL
                 //ENCONTRADO EN LA LOCAL
                 fijarCamposTabla(clivelocal);
+                btnIngresar.setEnabled(true);
+                btnRetirar.setEnabled(true);
             }
 
         } catch (ClassNotFoundException | SQLException ex) {
@@ -789,8 +863,10 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnRetirar;
+    private javax.swing.JButton btn_multa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private com.toedter.calendar.JCalendar calendar_multa;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -803,6 +879,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -840,6 +917,11 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -851,12 +933,19 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbl_des_multa;
+    private javax.swing.JLabel lbl_fecha_mul;
+    private javax.swing.JLabel lbl_placa_mul;
+    private javax.swing.JLabel lbl_url_multa;
     private javax.swing.JComboBox<String> roling;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblIngresoRetirar;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdClienteJoin;
     private javax.swing.JTextField txtPlacaJoin;
+    private javax.swing.JTextField txt_des_mul;
+    private javax.swing.JTextField txt_placa_mul;
+    private javax.swing.JTextField txt_url_multa;
     // End of variables declaration//GEN-END:variables
 
     private void llenarTabla(ArrayList<Cliente> clientes) {
@@ -888,6 +977,22 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         }
     }
 
+    public JButton getBtnMultar() {
+        return btn_multa;
+    }
+
+    public String getTxt_des_mul() {
+        return txt_des_mul.getText();
+    }
+
+    public String getTxt_placa_mul() {
+        return txt_placa_mul.getText();
+    }
+
+    public String getTxt_url_multa() {
+        return txt_url_multa.getText();
+    }
+    
     public String getAccion() {
         return accion;
     }

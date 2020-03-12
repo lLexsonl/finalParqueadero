@@ -14,5 +14,6 @@ public interface ICentral {
     public void IngresarVehiculoEnLaCentral(String info);
     public void IngresarClienteVehiculoEnLaCentral(String info);
     public String obtenerClientesVehiculosDeLaCentral(String id);
+    public void ingresarMulta(String sql);
     
 }

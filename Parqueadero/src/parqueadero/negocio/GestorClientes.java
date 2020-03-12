@@ -273,5 +273,15 @@ public class GestorClientes extends AModel {
         conector.desconectarse();
         this.notificar();
     }
+    /**
+     * Envia la información de la multa para que la cetral la cree
+     * @param placa
+     * @param desc
+     * @param url
+     * @param fecha 
+     */
+    public void crearMulta(String placa, String desc, String url, String fecha) {
+        this.central.ingresarMulta(String.format("%s,%s,%s,%s", placa, desc, url, fecha));
+    }
     
 }

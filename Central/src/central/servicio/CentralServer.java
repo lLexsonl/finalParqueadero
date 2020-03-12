@@ -1,4 +1,5 @@
 package central.servicio;
+
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -19,6 +20,7 @@ import central.negocio.Vehiculo;
 import central.negocio.Vigilante;
 import com.google.gson.JsonArray;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CentralServer implements Runnable {
@@ -37,12 +39,13 @@ public class CentralServer implements Runnable {
      * Constructor
      */
     public CentralServer() {
-        
-        gestor=new GestorCliente();
-        gestorvig=new GestorVigilante();
-        gestorvehiculo=new GestorVehiculo();
-        gestorClivehiculo=new GestorClienteVehiculo();
+
+        gestor = new GestorCliente();
+        gestorvig = new GestorVigilante();
+        gestorvehiculo = new GestorVehiculo();
+        gestorClivehiculo = new GestorClienteVehiculo();
     }
+
     /**
      * Logica completa del servidor
      */
@@ -95,9 +98,7 @@ public class CentralServer implements Runnable {
 
         } catch (IOException e) {
             System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CentralServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CentralServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -154,7 +155,7 @@ public class CentralServer implements Runnable {
      */
     private void procesarAccion(String accion, String parametros[]) throws ClassNotFoundException, SQLException {
         switch (accion) {
-            
+
             case "consultarCiudadanoVehiculo":
                 String idclive = parametros[1];
                 ClienteVehiculo clive = gestorClivehiculo.buscarClienteVehiculoPorId(idclive);
@@ -165,8 +166,8 @@ public class CentralServer implements Runnable {
                     System.out.println(parseToJSON(clive));
                     salidaDecorada.println(parseToJSON(clive));
                 }
-                break;  
-            
+                break;
+
             case "consultarCiudadano":
                 String id = parametros[1];
                 Cliente cli = gestor.buscarClientePorId(id);
@@ -175,8 +176,8 @@ public class CentralServer implements Runnable {
                 } else {
                     salidaDecorada.println(parseToJSON(cli));
                 }
-                break;   
-                
+                break;
+
             case "consultarVigilante":
                 String idV = parametros[1];
                 Vigilante vig = gestorvig.buscarVigilante(idV);
@@ -185,8 +186,8 @@ public class CentralServer implements Runnable {
                 } else {
                     salidaDecorada.println(parseToJSON(vig));
                 }
-                break;     
-                
+                break;
+
             case "consultarVehiculo":
                 String idVe = parametros[1];
                 Vehiculo vehi = gestorvehiculo.buscarVehiculoPorId(idVe);
@@ -195,20 +196,20 @@ public class CentralServer implements Runnable {
                 } else {
                     salidaDecorada.println(parseToJSON(vehi));
                 }
-                break; 
-                
-            case "ingresarCliente":
-                gestor.agregarCliente("920000"+(Integer.parseInt(gestor.consultarnumeroClientes())+1)+"",parametros[1],parametros[2],parametros[3],parametros[4],parametros[5]);
                 break;
-                
+
+            case "ingresarCliente":
+                gestor.agregarCliente("920000" + (Integer.parseInt(gestor.consultarnumeroClientes()) + 1) + "", parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                break;
+
             case "ingresarVehiculo":
-                gestorvehiculo.agregarVehiculo("960000"+(Integer.parseInt(gestorvehiculo.consultarnumeroVehiculos())+1)+"",parametros[1],parametros[2],parametros[3]);
-                break; 
-            
+                gestorvehiculo.agregarVehiculo("960000" + (Integer.parseInt(gestorvehiculo.consultarnumeroVehiculos()) + 1) + "", parametros[1], parametros[2], parametros[3]);
+                break;
+
             case "ingresarClienteVehiculo":
-                gestorClivehiculo.agregarClienteVehiculo("940000"+(Integer.parseInt(gestorClivehiculo.consultarnumeroClienteVehiculos())+1)+"",parametros[1],parametros[2]);
-                break; 
-                
+                gestorClivehiculo.agregarClienteVehiculo("940000" + (Integer.parseInt(gestorClivehiculo.consultarnumeroClienteVehiculos()) + 1) + "", parametros[1], parametros[2]);
+                break;
+
             case "consultarCiudadanosVehiculos":
                 String idclives = parametros[1];
                 ArrayList<ClienteVehiculo> clives = gestorClivehiculo.buscarClientesVehiculosPorId(idclives);
@@ -219,14 +220,24 @@ public class CentralServer implements Runnable {
                     System.out.println(parseToJSON(clives));
                     salidaDecorada.println(parseToJSON(clives));
                 }
-                break; 
+                break;
+            case "insertarMulta":
+                String placa, desc, fecha, url;
+                System.out.println("Llego multa central");
                 
+                placa = parametros[1];
+                desc = parametros[2];
+                url = parametros[3];
+                fecha = parametros[4];
+                
+                System.out.println("Parametros: " + placa + " " + desc + " " + url + " " + fecha );
+                
+                gestor.agregarMulta(placa, desc, url, fecha);
+                
+                break;
+
         }
     }
-    
-    
-    
-    
 
     /**
      * Cierra los flujos de entrada y salida
@@ -245,7 +256,6 @@ public class CentralServer implements Runnable {
      * @param ciu Objeto ciudadano
      * @return cadena json
      */
-    
     private String parseToJSON(Vehiculo vehi) {
         JsonObject jsonobj = new JsonObject();
         jsonobj.addProperty("idVehiculo", vehi.getIdvehiculo());
@@ -254,25 +264,27 @@ public class CentralServer implements Runnable {
         jsonobj.addProperty("tipo", vehi.getTipo());
         return jsonobj.toString();
     }
+
     private String parseToJSON(ArrayList<ClienteVehiculo> listado) {
- JsonArray array = new JsonArray();
- JsonObject jsonobj;
- for (ClienteVehiculo clisves : listado) {
-        jsonobj = new JsonObject();
-        jsonobj.addProperty("idCliente", clisves.getIdCliente());
-        jsonobj.addProperty("nombre", clisves.getNombre());
-        jsonobj.addProperty("apellido", clisves.getApellido());
-        jsonobj.addProperty("genero", clisves.getGenero());
-        jsonobj.addProperty("fechaNacimiento", clisves.getFechaNacimiento());
-        jsonobj.addProperty("idvehiculo", clisves.getIdvehiculo());
-        jsonobj.addProperty("nodeplaca", clisves.getNodeplaca());
-        jsonobj.addProperty("marca", clisves.getMarca());
-        jsonobj.addProperty("tipoVehiculo", clisves.getTipo());
- array.add(jsonobj);
- }
- //System.out.println("Planes json serializado: " + array.toString());
- return array.toString();
- }
+        JsonArray array = new JsonArray();
+        JsonObject jsonobj;
+        for (ClienteVehiculo clisves : listado) {
+            jsonobj = new JsonObject();
+            jsonobj.addProperty("idCliente", clisves.getIdCliente());
+            jsonobj.addProperty("nombre", clisves.getNombre());
+            jsonobj.addProperty("apellido", clisves.getApellido());
+            jsonobj.addProperty("genero", clisves.getGenero());
+            jsonobj.addProperty("fechaNacimiento", clisves.getFechaNacimiento());
+            jsonobj.addProperty("idvehiculo", clisves.getIdvehiculo());
+            jsonobj.addProperty("nodeplaca", clisves.getNodeplaca());
+            jsonobj.addProperty("marca", clisves.getMarca());
+            jsonobj.addProperty("tipoVehiculo", clisves.getTipo());
+            array.add(jsonobj);
+        }
+        //System.out.println("Planes json serializado: " + array.toString());
+        return array.toString();
+    }
+
     private String parseToJSON(ClienteVehiculo clive) {
         JsonObject jsonobj = new JsonObject();
         jsonobj.addProperty("idCliente", clive.getIdCliente());
@@ -286,6 +298,7 @@ public class CentralServer implements Runnable {
         jsonobj.addProperty("tipoVehiculo", clive.getTipo());
         return jsonobj.toString();
     }
+
     private String parseToJSON(Cliente cli) {
         JsonObject jsonobj = new JsonObject();
         jsonobj.addProperty("idCliente", cli.getIdCliente());
@@ -296,6 +309,7 @@ public class CentralServer implements Runnable {
         jsonobj.addProperty("rol", cli.getRol());
         return jsonobj.toString();
     }
+
     private String parseToJSON(Vigilante vig) {
         JsonObject jsonobj = new JsonObject();
         jsonobj.addProperty("numeroid", vig.getNumeroid());

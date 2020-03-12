@@ -54,7 +54,21 @@ public class GestorCliente {
                 
                 + ")");
         connector.desconectarse();
-
-       
+    }
+    
+    public void agregarMulta(String placa, String desc, String url, String fecha) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.actualizar("INSERT INTO MULTA"
+                + " VALUES ("
+                + "NULL,"
+                + "'" + placa + "',"
+                + "'" + desc + "',"
+                + "'" + url + "',"
+                + "'" + fecha +"',"
+                + "'DEBE'"
+                
+                + ")");
+        //connector.actualizar(String.format("INSERT INTO MULTA VALUES(1, '%s', '%s', '%s', CURRENT_DATE, 'DEBE')", placa, desc, url));
+        connector.desconectarse();
     }
 }
