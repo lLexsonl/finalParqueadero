@@ -10,7 +10,7 @@ import java.sql.Statement;
  *
  * @author Yerson
  */
-public class ConectorPostgresql {
+public class ConectorPostgresql implements central.negocio.Connection {
     
     private static ConectorPostgresql singleton;
 
@@ -33,6 +33,7 @@ public class ConectorPostgresql {
         return singleton;
     }
     
+    @Override
     public void conectarse() throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         cn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -46,6 +47,7 @@ public class ConectorPostgresql {
      * @param sql
      * @throws SQLException
      */
+    @Override
     public void crearConsulta(String sql) throws SQLException {
         st = cn.createStatement();
         rs = st.executeQuery(sql);
@@ -57,6 +59,7 @@ public class ConectorPostgresql {
      * @param sql
      * @throws SQLException
      */
+    @Override
     public void actualizar(String sql) throws SQLException {
         st = cn.createStatement();
         st.executeUpdate(sql);
@@ -67,6 +70,7 @@ public class ConectorPostgresql {
      *
      * @throws SQLException
      */
+    @Override
     public void desconectarse() throws SQLException {
         if (rs != null) {
             rs.close();
@@ -80,6 +84,7 @@ public class ConectorPostgresql {
      *
      * @return
      */
+    @Override
     public ResultSet getResultado() {
         return rs;
     }

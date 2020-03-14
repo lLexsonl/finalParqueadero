@@ -524,8 +524,8 @@
         <Container class="javax.swing.JPanel" name="jPanel28">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Gestion Asociaci&#xf3;n">
-                <Property name="tabTitle" type="java.lang.String" value="Gestion Asociaci&#xf3;n"/>
+              <JTabbedPaneConstraints tabName="Gesti&#xf3;n Asociaci&#xf3;n">
+                <Property name="tabTitle" type="java.lang.String" value="Gesti&#xf3;n Asociaci&#xf3;n"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -578,7 +578,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel14">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Numero de identificacion:"/>
+                        <Property name="text" type="java.lang.String" value="N&#xfa;mero de identificaci&#xf3;n:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtIdClienteJoin">

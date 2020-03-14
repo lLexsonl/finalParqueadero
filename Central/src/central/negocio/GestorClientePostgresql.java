@@ -6,35 +6,27 @@ import java.sql.SQLException;
  *
  * @author Usuario
  */
-public class GestorCliente {
+public class GestorClientePostgresql {
 
     private central.negocio.Connection connector;
 
-    public GestorCliente() {
-        connector = ConectorJdbc.getConector();
+    public GestorClientePostgresql() {
+        connector = ConectorPostgresql.getConector();
     }
 
-    public String consultarnumeroClientes() throws ClassNotFoundException, SQLException {
-
-        String numerodeclientes = "";
-        connector.conectarse();
-        connector.crearConsulta("SELECT COUNT(idcliente) AS num FROM cliente");
-        if (connector.getResultado().next()) {
-            numerodeclientes = connector.getResultado().getString("num");
-        }
-        connector.desconectarse();
-        return numerodeclientes;
-    }
-
-    public Cliente buscarClientePorId(String id) throws ClassNotFoundException, SQLException {
+    public ClientePost buscarClientePorId(String id) throws ClassNotFoundException, SQLException {
         connector.conectarse();
 
-        connector.crearConsulta("SELECT * FROM cliente Where idcliente='" + id + "'");
+        connector.crearConsulta("SELECT * FROM cliente Where id_cli='" + id + "'");
 
-        Cliente cliente = null;
+        ClientePost cliente = null;
         if (connector.getResultado().next()) {
-            cliente = new Cliente(connector.getResultado().getString("idCliente"), connector.getResultado().getString("nombre"), connector.getResultado().getString("apellido"), connector.getResultado().getString("genero"), connector.getResultado().getString("fechaNacimiento"), connector.getResultado().getString("rol"));
-
+            cliente = new ClientePost(connector.getResultado().getString("id_cli"), 
+                    connector.getResultado().getString("nombre_cli"),
+                    connector.getResultado().getString("apellido_cli"),
+                    connector.getResultado().getString("genero_cli"),
+                    connector.getResultado().getString("fecha_nac_cli"),
+                    connector.getResultado().getString("rol_cli"));
         }
         connector.desconectarse();
         return cliente;
@@ -42,7 +34,7 @@ public class GestorCliente {
 
     public void agregarCliente(String idcliente, String nombre, String apellido, String genero, String fechanacimiento, String rol) throws ClassNotFoundException, SQLException {
         connector.conectarse();
-        connector.actualizar("INSERT INTO cliente (idcliente, nombre,apellido,genero,fechanacimiento,rol)"
+        connector.actualizar("INSERT INTO cliente"
                 + " VALUES ("
                 + "'" + idcliente + "',"
                 + "'" + nombre + "',"

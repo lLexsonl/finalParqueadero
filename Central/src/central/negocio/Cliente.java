@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package central.negocio;
 
 /**
  *
- * @author Usuario
+ * @author yerson, breiner, adrian
  */
 public class Cliente {
     
@@ -22,20 +17,19 @@ public class Cliente {
      * Constructor parametrizado
      *
      * @param id cedula
-     * @param nombres los dos nombre
-     * @param apellidos los dos apellido
-     * @param direccion genero donde vive
-     * @param celular telefono movil
-     * @param email correo electronico
-     * @param sexo Género, masculino o femenino
+     * @param nombre los dos nombre
+     * @param apellido los dos apellido
+     * @param genero genero donde vive
+     * @param fechaNacimiento fecha de nacimiento del cliente
+     * @param rol Rol del cliente
      */
-    public Cliente(String idCliente, String nombre, String apellido, String genero, String fechaNacimiento, String sexo) {
+    public Cliente(String idCliente, String nombre, String apellido, String genero, String fechaNacimiento, String rol) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
-        this.rol = sexo;
+        this.rol = rol;
        
     }
 

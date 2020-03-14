@@ -181,7 +181,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel3.add(jPanel5);
 
-        jPanel6.setLayout(new java.awt.GridLayout());
+        jPanel6.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel2.setText("Numero de identificación:");
         jPanel6.add(jLabel2);
@@ -388,7 +388,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jTabbedPane1.addTab("Gestión Vehiculos", jPanel22);
 
-        jPanel28.setLayout(new java.awt.GridLayout());
+        jPanel28.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel29.setLayout(new java.awt.BorderLayout(0, 50));
 
@@ -403,7 +403,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel30.setLayout(new java.awt.GridLayout(2, 2, 0, 80));
 
-        jLabel14.setText("Numero de identificacion:");
+        jLabel14.setText("Número de identificación:");
         jPanel30.add(jLabel14);
         jPanel30.add(txtIdClienteJoin);
 
@@ -428,7 +428,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel28.add(jPanel29);
 
-        jTabbedPane1.addTab("Gestion Asociación", jPanel28);
+        jTabbedPane1.addTab("Gestión Asociación", jPanel28);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 

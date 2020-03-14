@@ -11,8 +11,10 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import central.negocio.Cliente;
+import central.negocio.ClientePost;
 import central.negocio.ClienteVehiculo;
 import central.negocio.GestorCliente;
+import central.negocio.GestorClientePostgresql;
 import central.negocio.GestorClienteVehiculo;
 import central.negocio.GestorVehiculo;
 import central.negocio.GestorVigilante;
@@ -33,6 +35,8 @@ public class CentralServer implements Runnable {
     private static Socket socket;
     private Scanner entradaDecorada;
     private PrintStream salidaDecorada;
+    
+    private static GestorClientePostgresql gestorPost;
     private static final int PUERTO = 5000;
 
     /**
@@ -44,6 +48,7 @@ public class CentralServer implements Runnable {
         gestorvig = new GestorVigilante();
         gestorvehiculo = new GestorVehiculo();
         gestorClivehiculo = new GestorClienteVehiculo();
+        gestorPost = new GestorClientePostgresql();
     }
 
     /**
@@ -155,7 +160,8 @@ public class CentralServer implements Runnable {
      */
     private void procesarAccion(String accion, String parametros[]) throws ClassNotFoundException, SQLException {
         switch (accion) {
-
+            //<editor-fold defaultstate="collapsed" desc="case de la base de datos HSQLDB">
+            
             case "consultarCiudadanoVehiculo":
                 String idclive = parametros[1];
                 ClienteVehiculo clive = gestorClivehiculo.buscarClienteVehiculoPorId(idclive);
@@ -233,9 +239,17 @@ public class CentralServer implements Runnable {
                 System.out.println("Parametros: " + placa + " " + desc + " " + url + " " + fecha );
                 
                 gestor.agregarMulta(placa, desc, url, fecha);
-                
                 break;
-
+//</editor-fold>
+            case "consultarClientePost":
+                ClientePost cliente = gestorPost.buscarClientePorId(parametros[1]);
+                if(cliente == null) {
+                    salidaDecorada.println("NO_ENCONTRADO");
+                } else {
+                    System.out.println(cliente.toJson());
+                    salidaDecorada.println(cliente.toJson());
+                }
+                break;
         }
     }
 

@@ -10,8 +10,9 @@ import java.sql.Statement;
  *
  * @author Usuario
  */
-public class ConectorJdbc {
+public class ConectorJdbc implements central.negocio.Connection {
 
+    private static ConectorJdbc conector;
     private Connection cn;
     private ResultSet rs;
     private Statement st;
@@ -20,10 +21,18 @@ public class ConectorJdbc {
     private final String USER = "sa";
     private final String PASSWORD = "123";
 
-    public ConectorJdbc() {
+    private ConectorJdbc() {
 
     }
 
+    public static ConectorJdbc getConector() {
+        if(conector == null) {
+            conector = new ConectorJdbc();
+        }
+        return conector;
+    }
+    
+    @Override
     public void conectarse() throws ClassNotFoundException, SQLException {
         Class.forName("org.hsqldb.jdbcDriver");
         cn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -34,6 +43,7 @@ public class ConectorJdbc {
      * @param sql
      * @throws SQLException 
      */
+    @Override
     public void crearConsulta(String sql) throws SQLException {
         st = cn.createStatement();
         rs = st.executeQuery(sql);
@@ -45,6 +55,7 @@ public class ConectorJdbc {
      * @param sql
      * @throws SQLException
      */
+    @Override
     public void actualizar(String sql) throws SQLException {
         st = cn.createStatement();
         st.executeUpdate(sql);
@@ -53,6 +64,7 @@ public class ConectorJdbc {
      * Cierra las variables de rs, st y cn que estén abiertas
      * @throws SQLException 
      */
+    @Override
     public void desconectarse() throws SQLException {
         if ( rs != null){
             rs.close();
@@ -64,6 +76,7 @@ public class ConectorJdbc {
      * Devuelve todo el conjunto de resultados
      * @return 
      */
+    @Override
     public ResultSet getResultado() {
         return rs;
     }
