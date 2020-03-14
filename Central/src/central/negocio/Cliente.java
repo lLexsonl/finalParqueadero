@@ -2,7 +2,7 @@ package central.negocio;
 
 /**
  *
- * @author yerson, breiner, adrian
+ * @author Usuario
  */
 public class Cliente {
     
@@ -17,19 +17,20 @@ public class Cliente {
      * Constructor parametrizado
      *
      * @param id cedula
-     * @param nombre los dos nombre
-     * @param apellido los dos apellido
-     * @param genero genero donde vive
-     * @param fechaNacimiento fecha de nacimiento del cliente
-     * @param rol Rol del cliente
+     * @param nombres los dos nombre
+     * @param apellidos los dos apellido
+     * @param direccion genero donde vive
+     * @param celular telefono movil
+     * @param email correo electronico
+     * @param sexo Género, masculino o femenino
      */
-    public Cliente(String idCliente, String nombre, String apellido, String genero, String fechaNacimiento, String rol) {
+    public Cliente(String idCliente, String nombre, String apellido, String genero, String fechaNacimiento, String sexo) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
-        this.rol = rol;
+        this.rol = sexo;
        
     }
 

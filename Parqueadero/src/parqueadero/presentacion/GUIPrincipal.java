@@ -87,13 +87,15 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jPanel19 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        NomCliIng = new javax.swing.JTextField();
+        pnlCrearUsuId = new javax.swing.JPanel();
+        lblCrearUsuId = new javax.swing.JLabel();
+        txtCrearUsuId = new javax.swing.JTextField();
         jPanel20 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCrearCliNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        ApeCliIng = new javax.swing.JTextField();
+        txtCrearCliApe = new javax.swing.JTextField();
         jPanel15 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         Femenino = new javax.swing.JRadioButton();
@@ -263,27 +265,37 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel19.add(jPanel10);
 
-        jPanel13.setLayout(new java.awt.GridLayout(1, 0));
+        pnlCrearUsuId.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel5.setText("Nombre :");
-        jPanel13.add(jLabel5);
-        jPanel13.add(NomCliIng);
+        lblCrearUsuId.setText("Identificación:");
+        pnlCrearUsuId.add(lblCrearUsuId);
 
-        jPanel19.add(jPanel13);
+        txtCrearUsuId.setPreferredSize(new java.awt.Dimension(250, 50));
+        pnlCrearUsuId.add(txtCrearUsuId);
+
+        jPanel19.add(pnlCrearUsuId);
 
         jPanel9.add(jPanel19);
 
         jPanel20.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel14.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 18, 5));
+
+        jLabel5.setText("Nombre :");
+        jPanel14.add(jLabel5);
+
+        txtCrearCliNombre.setPreferredSize(new java.awt.Dimension(250, 50));
+        jPanel14.add(txtCrearCliNombre);
 
         jLabel4.setText("Apellido:");
         jPanel14.add(jLabel4);
-        jPanel14.add(ApeCliIng);
+
+        txtCrearCliApe.setPreferredSize(new java.awt.Dimension(250, 50));
+        jPanel14.add(txtCrearCliApe);
 
         jPanel20.add(jPanel14);
 
-        jPanel15.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         jLabel6.setText("Sexo:");
         jPanel15.add(jLabel6);
@@ -617,25 +629,28 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Registrar Un cliente en la base de datos Central
-
-        String nomclienteing = NomCliIng.getText().trim();
-        String apeclienteing = ApeCliIng.getText().trim();
+        String idcliente = txtCrearUsuId.getText().trim();
+        String nomclienteing = txtCrearCliNombre.getText().trim();
+        String apeclienteing = txtCrearCliApe.getText().trim();
         String sexoclienteing = "";
         if (Femenino.isSelected()) {
-            sexoclienteing = "F";
+            sexoclienteing = "FEMENINO";
         }
-        if (Masculino.isSelected()) {
-            sexoclienteing = "M";
+        else if (Masculino.isSelected()) {
+            sexoclienteing = "MASCULINO";
+        }
+        else{
+            Utilidades.mensajeAdvertencia("No ha seleccionado el genero", "Crear Cliente");
         }
         String clifechanacimiento = FechaCli.getCalendar().get(Calendar.DAY_OF_MONTH) + "-";
         clifechanacimiento = clifechanacimiento + FechaCli.getCalendar().get(Calendar.MARCH) + "-";
         clifechanacimiento = clifechanacimiento + FechaCli.getCalendar().get(Calendar.YEAR) + "";
 
-        String rolCli = roling.getSelectedItem().toString();
-        String infototal = nomclienteing + "," + apeclienteing + "," + sexoclienteing + "," + clifechanacimiento + "," + rolCli;
+        String rolCli = ((String) roling.getSelectedItem()).toUpperCase();
+        String info = String.format("%s,%s,%s,%s,%s,%s", idcliente,nomclienteing ,apeclienteing,sexoclienteing,clifechanacimiento,rolCli);
 
         GestorClientes gestor = new GestorClientes();
-        gestor.IngresarClienteCentral(infototal);
+        gestor.IngresarClienteCentral(info);
         Utilidades.mensajeExito("Se registro un nuevo cliente en la central", "Gestión Usuarios");
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -852,12 +867,10 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ApeCliIng;
     private com.toedter.calendar.JCalendar FechaCli;
     private javax.swing.JRadioButton Femenino;
     private javax.swing.JTextField Marcatxt;
     private javax.swing.JRadioButton Masculino;
-    private javax.swing.JTextField NomCliIng;
     private javax.swing.JTextField Placatxt;
     private javax.swing.JComboBox<String> TipoCBox;
     private javax.swing.JButton btnBuscar;
@@ -896,7 +909,6 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -933,13 +945,18 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblCrearUsuId;
     private javax.swing.JLabel lbl_des_multa;
     private javax.swing.JLabel lbl_fecha_mul;
     private javax.swing.JLabel lbl_placa_mul;
     private javax.swing.JLabel lbl_url_multa;
+    private javax.swing.JPanel pnlCrearUsuId;
     private javax.swing.JComboBox<String> roling;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblIngresoRetirar;
+    private javax.swing.JTextField txtCrearCliApe;
+    private javax.swing.JTextField txtCrearCliNombre;
+    private javax.swing.JTextField txtCrearUsuId;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdClienteJoin;
     private javax.swing.JTextField txtPlacaJoin;

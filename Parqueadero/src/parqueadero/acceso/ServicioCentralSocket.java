@@ -27,7 +27,7 @@ public class ServicioCentralSocket implements ICentral {
     @Override
     public void IngresarClienteEnLaCentral(String info) {
 
-        String respuesta = null;
+        String respuesta;
         try {
             conectar(IP_SERVIDOR, PUERTO);
             respuesta = leerFlujoEntradaSalida(info, 3);
@@ -153,13 +153,13 @@ public class ServicioCentralSocket implements ICentral {
         
         switch(opc) {
             case 1:
-                salidaDecorada.println("consultarCiudadano," + id);
+                salidaDecorada.println("buscarCliente," + id);
                 break;
             case 2:
-                salidaDecorada.println("consultarVigilante," + id);
+                salidaDecorada.println("buscarVigilante," + id);
                 break;
             case 3:
-                salidaDecorada.println("ingresarCliente," + id);
+                salidaDecorada.println("insertarCliente," + id);
                 break;
             case 4:
                 salidaDecorada.println("ingresarVehiculo," + id);
@@ -174,7 +174,8 @@ public class ServicioCentralSocket implements ICentral {
                 salidaDecorada.println("ingresarClienteVehiculo," + id);
                 break;
             case 8:
-                salidaDecorada.println("consultarCiudadanosVehiculos," + id);
+                System.out.println("Estoy en consultar clienteVehiculo");
+                salidaDecorada.println("buscarClienteVehiculo," + id);
                 break;
             case 9:
                 System.out.println("Estoy en parqueadero. Multa: " + id);

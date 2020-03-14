@@ -25,7 +25,10 @@ public class GestorVigilante extends AModel {
         Central = new ServicioCentralSocket();
                 
     }
-    private void parseToVigilante(Vigilante vigilante, String json) {
+    
+    //<editor-fold defaultstate="collapsed" desc="comment">
+    /*
+     private void parseToVigilante(Vigilante vigilante, String json) {
         Gson gson = new Gson();
         Properties properties = gson.fromJson(json, Properties.class);
         
@@ -39,6 +42,7 @@ public class GestorVigilante extends AModel {
         vigilante.setClaveacceso(properties.getProperty("claveacceso"));
         
     }
+    
     public Vigilante buscarVigilanteCentral(String id) {
         //Obtiene el objeto json serializado al servidor de la registraduria
         String json = Central.obtenerVigilanteDeLaCentral(id);
@@ -49,5 +53,29 @@ public class GestorVigilante extends AModel {
             return vig;
         }
         return null;
+    }
+    */
+//</editor-fold>
+   
+    public UsuarioPost buscarVigilanteCentral(String id) {
+        //Obtiene el objeto json serializado al servidor de la registraduria
+        String json = Central.obtenerVigilanteDeLaCentral(id);
+        if (!json.equals("NO_ENCONTRADO")) {
+            //Lo encontró
+            System.out.println("Encontro el vigilante");
+            UsuarioPost usu = new UsuarioPost();
+            jsonToUsu(usu, json);
+            return usu;
+        }
+        System.out.println("NO encontro el vigilante");
+        return null;
+    }
+    
+    private void jsonToUsu(UsuarioPost usu, String json) {
+        Gson gson = new Gson();
+        Properties properties = gson.fromJson(json, Properties.class);
+        usu.setId_cli(properties.getProperty("id_cli"));
+        usu.setUser_usu(properties.getProperty("user_usu"));
+        usu.setPass_usu(properties.getProperty("pass_usu"));
     }
 }

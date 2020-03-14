@@ -74,7 +74,6 @@ public class GestorClientes extends AModel {
     public void IngresarClienteCentral(String id) {
         //Obtiene el objeto json serializado al servidor de la registraduria
          central.IngresarClienteEnLaCentral(id);
-        
     }
     
     /**

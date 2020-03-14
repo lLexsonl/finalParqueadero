@@ -13,40 +13,32 @@ import java.util.logging.Logger;
 import central.negocio.Cliente;
 import central.negocio.ClientePost;
 import central.negocio.ClienteVehiculo;
-import central.negocio.GestorCliente;
+import central.negocio.ClienteVehiculoPost;
 import central.negocio.GestorClientePostgresql;
-import central.negocio.GestorClienteVehiculo;
-import central.negocio.GestorVehiculo;
-import central.negocio.GestorVigilante;
+import central.negocio.UsuarioPost;
 import central.negocio.Vehiculo;
 import central.negocio.Vigilante;
 import com.google.gson.JsonArray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class CentralServer implements Runnable {
+public class CentralServerPost implements Runnable {
 
-    private final GestorClienteVehiculo gestorClivehiculo;
-    private final GestorVehiculo gestorvehiculo;
-    private final GestorCliente gestor;
-    private final GestorVigilante gestorvig;
     private static ServerSocket ssock;
     private static Socket socket;
     private Scanner entradaDecorada;
     private PrintStream salidaDecorada;
-    
+
+    private static GestorClientePostgresql gestor;
     private static final int PUERTO = 5000;
 
     /**
      * Constructor
      */
-    public CentralServer() {
-
-        gestor = new GestorCliente();
-        gestorvig = new GestorVigilante();
-        gestorvehiculo = new GestorVehiculo();
-        gestorClivehiculo = new GestorClienteVehiculo();
+    public CentralServerPost() {
+        gestor = new GestorClientePostgresql();
     }
 
     /**
@@ -65,7 +57,7 @@ public class CentralServer implements Runnable {
      * Lanza el hilo
      */
     private static void lanzarHilo() {
-        new Thread(new CentralServer()).start();
+        new Thread(new CentralServerPost()).start();
     }
 
     private static void abrirPuerto() {
@@ -159,83 +151,63 @@ public class CentralServer implements Runnable {
     private void procesarAccion(String accion, String parametros[]) throws ClassNotFoundException, SQLException {
         switch (accion) {
             //<editor-fold defaultstate="collapsed" desc="case de la base de datos HSQLDB">
-            
-            case "consultarCiudadanoVehiculo":
-                String idclive = parametros[1];
-                ClienteVehiculo clive = gestorClivehiculo.buscarClienteVehiculoPorId(idclive);
-                //System.out.println(clive.toString());
-                if (clive == null) {
-                    salidaDecorada.println("NO_ENCONTRADO");
-                } else {
-                    System.out.println(parseToJSON(clive));
-                    salidaDecorada.println(parseToJSON(clive));
-                }
-                break;
-
-            case "consultarCiudadano":
+            case "buscarCliente":
                 String id = parametros[1];
-                Cliente cli = gestor.buscarClientePorId(id);
+                ClientePost cli = gestor.buscarClientePorId(id);
                 if (cli == null) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
-                    salidaDecorada.println(parseToJSON(cli));
+                    salidaDecorada.println(cli.toJson());
                 }
                 break;
 
-            case "consultarVigilante":
+            case "buscarVigilante":
+                System.out.println("Estoy en consulta vigilante ");
                 String idV = parametros[1];
-                Vigilante vig = gestorvig.buscarVigilante(idV);
-                if (vig == null) {
+                UsuarioPost usu = gestor.buscarVigilante(idV);
+                if (usu == null) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
-                    salidaDecorada.println(parseToJSON(vig));
+                    System.out.println("usu sale: " + usu.toJson());
+                    salidaDecorada.println(usu.toJson());
                 }
                 break;
-
-            case "consultarVehiculo":
-                String idVe = parametros[1];
-                Vehiculo vehi = gestorvehiculo.buscarVehiculoPorId(idVe);
-                if (vehi == null) {
-                    salidaDecorada.println("NO_ENCONTRADO");
-                } else {
-                    salidaDecorada.println(parseToJSON(vehi));
-                }
-                break;
-
-            case "ingresarCliente":
+            case "insertarCliente":
                 gestor.agregarCliente(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5], parametros[6]);
                 break;
-
-            case "ingresarVehiculo":
-                gestorvehiculo.agregarVehiculo(parametros[1] + "", parametros[2], parametros[3], parametros[4]);
-                break;
-
-            case "ingresarClienteVehiculo":
-                gestorClivehiculo.agregarClienteVehiculo(parametros[1], parametros[2], parametros[3]);
-                break;
-
-            case "consultarCiudadanosVehiculos":
-                String idclives = parametros[1];
-                ArrayList<ClienteVehiculo> clives = gestorClivehiculo.buscarClientesVehiculosPorId(idclives);
-                System.out.println(clives.toString());
-                if (clives.isEmpty()) {
+            case "buscarClienteVehiculo":
+                String idcv = parametros[1];
+                List<ClienteVehiculoPost> listcv = gestor.buscarVehiculosCliente(idcv);
+                if (listcv.isEmpty()) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
-                    System.out.println(parseToJSON(clives));
-                    salidaDecorada.println(parseToJSON(clives));
+                    StringBuilder json = new StringBuilder();
+                    json.append("{");
+                    listcv.stream().map((c) -> {
+                        json.append(c.toJson());
+                        return c;
+                    }).forEachOrdered((_item) -> {
+                        json.append(", ");
+                    });
+                    json.append("}");
+                    System.out.println("json sale: " + json.toString());
+                    salidaDecorada.println(json.toString());
                 }
                 break;
             case "insertarMulta":
-                String placa, desc, fecha, url;
+                String placa,
+                 desc,
+                 fecha,
+                 url;
                 System.out.println("Llego multa central");
-                
+
                 placa = parametros[1];
                 desc = parametros[2];
                 url = parametros[3];
                 fecha = parametros[4];
-                
-                System.out.println("Parametros: " + placa + " " + desc + " " + url + " " + fecha );
-                
+
+                System.out.println("Parametros: " + placa + " " + desc + " " + url + " " + fecha);
+
                 gestor.agregarMulta(placa, desc, url, fecha);
                 break;
 //</editor-fold>

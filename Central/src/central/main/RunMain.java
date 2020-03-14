@@ -1,10 +1,7 @@
 package central.main;
 
-import central.negocio.Cliente;
-import central.negocio.GestorCliente;
-import central.negocio.GestorVigilante;
-import central.negocio.Vigilante;
 import central.servicio.CentralServer;
+import central.servicio.CentralServerPost;
 import java.sql.SQLException;
 
 /**
@@ -13,10 +10,7 @@ import java.sql.SQLException;
  */
 public class RunMain {
     public static void main(String args[]) throws ClassNotFoundException, SQLException{
-     
-        
-        
-       CentralServer regSer = new CentralServer();
+       CentralServerPost regSer = new CentralServerPost();
        regSer.iniciar();
     }
 }

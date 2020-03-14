@@ -5,14 +5,11 @@
  */
 package parqueadero.presentacion;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mvcf.AModel;
 import mvcf.AView;
 import parqueadero.clientemain.RunMVC;
 import parqueadero.negocio.GestorVigilante;
-import parqueadero.negocio.Vigilante;
+import parqueadero.negocio.UsuarioPost;
 import parqueadero.utils.Utilidades;
 
 /**
@@ -28,8 +25,8 @@ public class GUILogin extends javax.swing.JFrame implements AView {
      */
     public GUILogin() {
         initComponents();
-        setSize(250, 390);
-        setLocation(70, 70);
+        this.setSize(250, 390);
+        this.setLocation(70, 70);
     }
     
     public void setObject(Object bean) {
@@ -106,21 +103,19 @@ public class GUILogin extends javax.swing.JFrame implements AView {
             return;
         }
         // Busca el cliente en la base de datos Central
-        Vigilante vig = null;
+        UsuarioPost usu = gestor.buscarVigilanteCentral(id);
         
-        vig = gestor.buscarVigilanteCentral(id);
-        
-        if (vig==null) {
+        if (usu==null) {
             //Si no se encontro el ID del Vigilante.
-            Utilidades.mensajeError("  Identificación Invalida.", "Atención");
+            Utilidades.mensajeError("Identificación NO valida.", "Atención");
         }else{
             //Validamos ClaveAcceso.
-            if(Clavetxt.getText().trim().equals(vig.getClaveacceso())){
-                Utilidades.mensajeExito("       Bienvenido.", "Verificado");
+            if(Clavetxt.getText().trim().equals(usu.getPass_usu())){
+                Utilidades.mensajeExito("Bienvenido.", "Verificado");
                 this.setVisible(false);
                 RunMVC mainRunMVC = new RunMVC();
             }else{
-                Utilidades.mensajeError("    Codigo Invalido.", "Atención");
+                Utilidades.mensajeError("Codigo Invalido.", "Atención");
 
             }
         }
