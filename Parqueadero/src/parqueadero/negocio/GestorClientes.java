@@ -14,7 +14,7 @@ import parqueadero.acceso.IFabricaServicioCentral;
  * Representa el modelo (Observable) de datos Cuando hay cambios en el estado,
  * notifica a todas sus vistas (observadores)
  *
- * @author Julio, Libardo, Ricardo
+ * @author Julio, Libardo, Ricardo, Yerson, Breiner, Adrian
  */
 public class GestorClientes extends AModel {
 

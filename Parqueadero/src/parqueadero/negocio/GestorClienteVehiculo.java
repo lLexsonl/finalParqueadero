@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package parqueadero.negocio;
 
 import com.google.gson.Gson;
@@ -41,26 +36,24 @@ public class GestorClienteVehiculo {
         connector.desconectarse();
         return clientevehiculo;
     }
-    public ClienteVehiculo buscarClienteVehiculoEnCentral(String id) {
+    public ClienteVehiculoPost[] buscarClienteVehiculoEnCentral(String id) {
         //Obtiene el objeto json serializado al servidor de la registraduria
         String json = central.obtenerClienteVehiculoDeLaCentral(id);
         System.out.println("Json que viene de la central : " + json);
         if (!json.equals("NO_ENCONTRADO")) {
             //Lo encontró
-            ClienteVehiculo clienteve = new ClienteVehiculo();
-            parseToClienteVehiculo(clienteve, json);
-            System.out.println("parseToClienteVeiculo " + clienteve.toString());
+            ClienteVehiculoPost[] clienteve = parseToClienteVehiculo(json);
             return clienteve;
         }
         return null;
     }
-    public ClienteVehiculo[] buscarClientesVehiculosEnCentral(String id) {
+    public ClienteVehiculoPost[] buscarClientesVehiculosEnCentral(String id) {
         //Obtiene el objeto json serializado al servidor de la registraduria
         String json = central.obtenerClientesVehiculosDeLaCentral(id);
         System.out.println("\n Json que viene de la central : " + json);
         if (!json.equals("NO_ENCONTRADO")) {
             //Lo encontró
-            return this.deserializarClientesVehiculos( json);
+            return this.parseToClienteVehiculo( json);
             //System.out.println("parseToClienteVeiculo " + clienteve.toString());
             //return clienteve;
         }
@@ -72,19 +65,11 @@ public class GestorClienteVehiculo {
         
     }
     
-    private void parseToClienteVehiculo(ClienteVehiculo clienteve, String json) {
-        Gson gson = new Gson();
-        Properties properties = gson.fromJson(json, Properties.class);
-        clienteve.setIdCliente(properties.getProperty("idCliente"));
-        clienteve.setNombre(properties.getProperty("nombre"));
-        clienteve.setApellido(properties.getProperty("apellido"));
-        clienteve.setGenero(properties.getProperty("genero"));
-        clienteve.setFechaNacimiento(properties.getProperty("fechaNacimiento"));
-        clienteve.setIdvehiculo(properties.getProperty("idVehiculo"));
-        clienteve.setNodeplaca(properties.getProperty("placa"));
-        clienteve.setMarca(properties.getProperty("marca"));
-        clienteve.setTipoVehiculo(properties.getProperty("tipoVehiculo")); 
+    private ClienteVehiculoPost[] parseToClienteVehiculo(String json) {
+        ClienteVehiculoPost[] array = new Gson().fromJson(json, ClienteVehiculoPost[].class);
+        return array;
     }
+    
     private ClienteVehiculo[] deserializarClientesVehiculos(String arrayJsonSerializado) {
 
         ClienteVehiculo[] clientesvehiculos = new Gson().fromJson(arrayJsonSerializado, ClienteVehiculo[].class);

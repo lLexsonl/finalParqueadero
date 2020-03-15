@@ -165,7 +165,7 @@ public class ServicioCentralSocket implements ICentral {
                 salidaDecorada.println("ingresarVehiculo," + id);
                 break;
             case 5:
-                salidaDecorada.println("consultarCiudadanoVehiculo," + id);
+                salidaDecorada.println("buscarClienteVehiculo," + id);
                 break;
             case 6:
                 salidaDecorada.println("consultarVehiculo," + id);

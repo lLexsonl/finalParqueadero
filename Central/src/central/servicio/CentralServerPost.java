@@ -181,17 +181,9 @@ public class CentralServerPost implements Runnable {
                 if (listcv.isEmpty()) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
-                    StringBuilder json = new StringBuilder();
-                    json.append("{");
-                    listcv.stream().map((c) -> {
-                        json.append(c.toJson());
-                        return c;
-                    }).forEachOrdered((_item) -> {
-                        json.append(", ");
-                    });
-                    json.append("}");
-                    System.out.println("json sale: " + json.toString());
-                    salidaDecorada.println(json.toString());
+                    String json = serializarVehiculosCliente(listcv);
+                    System.out.println("json sale: " + json);
+                    salidaDecorada.println(json);
                 }
                 break;
             case "insertarMulta":
@@ -240,20 +232,18 @@ public class CentralServerPost implements Runnable {
         return jsonobj.toString();
     }
 
-    private String parseToJSON(ArrayList<ClienteVehiculo> listado) {
+    private String serializarVehiculosCliente(List<ClienteVehiculoPost> listado) {
         JsonArray array = new JsonArray();
         JsonObject jsonobj;
-        for (ClienteVehiculo clisves : listado) {
+        for (ClienteVehiculoPost cli : listado) {
             jsonobj = new JsonObject();
-            jsonobj.addProperty("idCliente", clisves.getIdCliente());
-            jsonobj.addProperty("nombre", clisves.getNombre());
-            jsonobj.addProperty("apellido", clisves.getApellido());
-            jsonobj.addProperty("genero", clisves.getGenero());
-            jsonobj.addProperty("fechaNacimiento", clisves.getFechaNacimiento());
-            jsonobj.addProperty("idvehiculo", clisves.getIdvehiculo());
-            jsonobj.addProperty("nodeplaca", clisves.getNodeplaca());
-            jsonobj.addProperty("marca", clisves.getMarca());
-            jsonobj.addProperty("tipoVehiculo", clisves.getTipo());
+            jsonobj.addProperty("id_cli", cli.getId_cli());
+            jsonobj.addProperty("nombre_cli", cli.getNombre_cli());
+            jsonobj.addProperty("apellido_cli", cli.getApellido_cli());
+            jsonobj.addProperty("rol_cli", cli.getRol_cli());
+            jsonobj.addProperty("placa_vehi", cli.getPlaca_vehi());
+            jsonobj.addProperty("marca_vehi", cli.getMarca_vehi());
+            jsonobj.addProperty("tipo_vehi", cli.getTipo_vehi());
             array.add(jsonobj);
         }
         //System.out.println("Planes json serializado: " + array.toString());

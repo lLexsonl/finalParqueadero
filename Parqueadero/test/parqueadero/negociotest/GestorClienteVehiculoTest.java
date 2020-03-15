@@ -8,9 +8,7 @@ package parqueadero.negociotest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import parqueadero.negocio.ClienteVehiculo;
-import parqueadero.negocio.ClienteVehiculo;
-import parqueadero.negocio.GestorClienteVehiculo;
+import parqueadero.negocio.ClienteVehiculoPost;
 import parqueadero.negocio.GestorClienteVehiculo;
 
 /**
@@ -30,7 +28,7 @@ public class GestorClienteVehiculoTest {
     public void test() throws Exception{
         
         GestorClienteVehiculo gcv=new GestorClienteVehiculo();
-        ClienteVehiculo cv=gcv.buscarClienteVehiculoEnCentral("9200002");
-        assertEquals("9200002",cv.getIdCliente());    
+        ClienteVehiculoPost[] cv = gcv.buscarClienteVehiculoEnCentral("9200002");
+        assertEquals("9200002",cv[0].getId_cli());    
     }
 }

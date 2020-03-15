@@ -14,6 +14,7 @@ import mvcf.AModel;
 import mvcf.AView;
 import parqueadero.negocio.Cliente;
 import parqueadero.negocio.ClienteVehiculo;
+import parqueadero.negocio.ClienteVehiculoPost;
 import parqueadero.negocio.GestorClienteVehiculo;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.negocio.GestorVehiculo;
@@ -560,8 +561,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         }
         Cliente cli = null;
         List<ClienteVehiculo> clivelocal = null;
-        ClienteVehiculo clive = null;
-        List<ClienteVehiculo> list = null;
+        ClienteVehiculoPost[] clive;
 
         // SE HACE LA BUSQUEDA INICIALMENTE EN LA BD LOCAL
         try {
@@ -590,10 +590,8 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
                 if (clive != null) {
                     //ENCONTRADO EN LA CENTRAL
 
-                    ClienteVehiculo[] lista = gestor2.buscarClientesVehiculosEnCentral(id);
+                    ClienteVehiculoPost[] lista = gestor2.buscarClientesVehiculosEnCentral(id);
                     fijarCamposTabla2(lista);
-                    //fijarCamposTabla(clive);
-                    accion = "EDITAR";
                     btnIngresar.setEnabled(true);
                     btnRetirar.setEnabled(true);
                 } else {
@@ -782,19 +780,19 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
     }
 
-    private void fijarCamposTabla2(ClienteVehiculo[] list) {
+    private void fijarCamposTabla2(ClienteVehiculoPost[] list) {
 
         this.inicializarTabla();
         DefaultTableModel model = (DefaultTableModel) tblIngresoRetirar.getModel();
 
         Object rowData[] = new Object[7];
         for (int i = 0; i < list.length; i++) {
-            rowData[0] = list[i].getIdCliente();
-            rowData[1] = list[i].getNombre();
-            rowData[2] = list[i].getApellido();
-            rowData[3] = list[i].getIdvehiculo();
-            rowData[4] = list[i].getNodeplaca();
-            rowData[5] = list[i].getTipoVehiculo();
+            rowData[0] = list[i].getId_cli();
+            rowData[1] = list[i].getNombre_cli();
+            rowData[2] = list[i].getApellido_cli();
+            rowData[3] = list[i].getRol_cli();
+            rowData[4] = list[i].getPlaca_vehi();
+            rowData[5] = list[i].getTipo_vehi();
             model.addRow(rowData);
         }
     }
@@ -822,7 +820,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         tblIngresoRetirar.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Id", "Nombres", "Apellidos", "IdVehiculo", "Placa", "Tipo"}
+                    "Id Cliente", "Nombre Cliente", "Apellido Cliente", "Rol Cliente", "Placa Vehiculo", "Tipo Vehiculo"}
         ));
     }
 
