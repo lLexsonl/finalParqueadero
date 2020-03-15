@@ -52,18 +52,17 @@ public class GUIClientesController extends AActionController {
                     id = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 0));
                     nombre = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 1));
                     apellido = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 2));
-                    //rol = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 3));
+                    rol = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 3));
                     tipo = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 5));
-                    idVehiculo = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 3));
                     placa = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 4));
 
-                    fingreso = Utilidades.fechaAcual();//"19/02/2020";
+                    fingreso = Utilidades.fechaAcualConFormato();//"19/02/2020";
                     puesto = asignarPuesto(tipo);
                     System.out.println(puesto);
-                    if (ingresoValido(id, idVehiculo)) {
+                    if (ingresoValido(id, placa)) {
                         if (puesto != -1) {
                             try {
-                                gestor.agregarIngreso(idVehiculo, id, String.valueOf(puesto), fingreso, null);
+                                gestor.agregarIngresoCentral(placa, id, String.valueOf(puesto), fingreso);
                                 Utilidades.mensajeExito("Se registró el ingreso", "Ingreso");
                             } catch (ClassNotFoundException | SQLException ex) {
                                 System.out.println(ex.getMessage());
@@ -194,9 +193,9 @@ public class GUIClientesController extends AActionController {
         }
 
         try {
-            List<Ingreso> list = gestor.buscarIngresos();
+            List<Ingreso> list = gestor.buscarIngresosCentral();
 
-            ints.removeAll(list.stream().map(l -> l.getPuesto()).collect(Collectors.toList()));
+            ints.removeAll(list.stream().map(l -> l.getPuesto().split("_")[1]).collect(Collectors.toList()));
 
             //System.out.println(Arrays.toString(ints.toArray()));
             if (tipo.equals("MOTO")) {
@@ -216,7 +215,7 @@ public class GUIClientesController extends AActionController {
     public boolean ingresoValido(String id, String placa) {
         boolean valido = true;
         try {
-            List<Ingreso> list = gestor.buscarIngresos();
+            List<Ingreso> list = gestor.buscarIngresosCentral();
 
             if (!list.isEmpty()) {
                 for (Ingreso i : list) {

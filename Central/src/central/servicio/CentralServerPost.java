@@ -15,6 +15,7 @@ import central.negocio.ClientePost;
 import central.negocio.ClienteVehiculo;
 import central.negocio.ClienteVehiculoPost;
 import central.negocio.GestorClientePostgresql;
+import central.negocio.Ingreso;
 import central.negocio.UsuarioPost;
 import central.negocio.Vehiculo;
 import central.negocio.Vigilante;
@@ -138,6 +139,7 @@ public class CentralServerPost implements Runnable {
             parametros[i++] = tokens.nextToken();
         }
         String accion = parametros[0];
+        System.out.println("Accion: " + accion);
         procesarAccion(accion, parametros);
 
     }
@@ -150,7 +152,6 @@ public class CentralServerPost implements Runnable {
      */
     private void procesarAccion(String accion, String parametros[]) throws ClassNotFoundException, SQLException {
         switch (accion) {
-            //<editor-fold defaultstate="collapsed" desc="case de la base de datos HSQLDB">
             case "buscarCliente":
                 String id = parametros[1];
                 ClientePost cli = gestor.buscarClientePorId(id);
@@ -202,7 +203,30 @@ public class CentralServerPost implements Runnable {
 
                 gestor.agregarMulta(placa, desc, url, fecha);
                 break;
-//</editor-fold>
+            case "insertarIngreso":
+                System.out.println("Estoy en insertar ingreso central");
+                String placaing, iding, puestoing, fingresoing;
+                System.out.println("Estoy en Ingreso central");
+                
+                placaing = parametros[1];
+                puestoing = parametros[3];
+                iding = parametros[2];
+                fingresoing = parametros[4];
+                
+                gestor.agregarIngreso(placaing, iding, puestoing, fingresoing);
+                break;
+            case "buscarIngresos":
+                
+                List<Ingreso> listIngresos = gestor.buscarIngresos();
+                
+                if (listIngresos.isEmpty()) {
+                    salidaDecorada.println("NO_ENCONTRADO");
+                }
+                else {
+                    String json = serializarIngresos(listIngresos);
+                    salidaDecorada.println(json);
+                }
+                break;
         }
     }
 
@@ -244,6 +268,22 @@ public class CentralServerPost implements Runnable {
             jsonobj.addProperty("placa_vehi", cli.getPlaca_vehi());
             jsonobj.addProperty("marca_vehi", cli.getMarca_vehi());
             jsonobj.addProperty("tipo_vehi", cli.getTipo_vehi());
+            array.add(jsonobj);
+        }
+        //System.out.println("Planes json serializado: " + array.toString());
+        return array.toString();
+    }
+    
+    private String serializarIngresos(List<Ingreso> listado) {
+        JsonArray array = new JsonArray();
+        JsonObject jsonobj;
+        for (Ingreso ing : listado) {
+            jsonobj = new JsonObject();
+            jsonobj.addProperty("placa", ing.getPlaca());
+            jsonobj.addProperty("id", ing.getId());
+            jsonobj.addProperty("puesto", ing.getPuesto());
+            jsonobj.addProperty("pingreso", ing.getPingreso());
+            jsonobj.addProperty("fsalida", ing.getFsalida());
             array.add(jsonobj);
         }
         //System.out.println("Planes json serializado: " + array.toString());

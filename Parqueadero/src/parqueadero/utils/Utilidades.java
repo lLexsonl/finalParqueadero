@@ -322,7 +322,7 @@ public class Utilidades {
     }
     
     public static String fechaAcualConFormato() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
         LocalDateTime now = LocalDateTime.now();
         return format.format(now);
     }

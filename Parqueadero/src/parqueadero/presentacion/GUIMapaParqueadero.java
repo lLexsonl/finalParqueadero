@@ -650,9 +650,9 @@ public class GUIMapaParqueadero extends javax.swing.JFrame implements AView{
         GestorClientes gestor = (GestorClientes) amodel;
 
         try {
-            List<Ingreso> list = gestor.buscarIngresos();
+            List<Ingreso> list = gestor.buscarIngresosCentral();
             list.forEach((i) -> {
-                listButtons.get(Integer.parseInt(i.getPuesto())-1).setBackground(Color.GREEN);
+                listButtons.get(Integer.parseInt(i.getPuesto().split("_")[1])-1).setBackground(Color.GREEN);
             });
             pnlMapa.updateUI();
         } catch (ClassNotFoundException | SQLException e) {

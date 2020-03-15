@@ -181,6 +181,14 @@ public class ServicioCentralSocket implements ICentral {
                 System.out.println("Estoy en parqueadero. Multa: " + id);
                 salidaDecorada.println("insertarMulta," + id);
                 break;
+            case 10:
+                System.out.println("Estoy en parqueadero. Ingreso: " + id);
+                salidaDecorada.println("insertarIngreso," + id);
+                break;
+            case 11:
+                System.out.println("Ingresos");
+                salidaDecorada.println("buscarIngresos");
+                break;
             default:
                 Utilidades.mensajeError("Opción NO valida", "Comunicación con el servidor");
                 break;
@@ -220,6 +228,33 @@ public class ServicioCentralSocket implements ICentral {
         } catch (IOException ex) {
             Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void insertarIngreso(String info) {
+        try {
+            conectar(IP_SERVIDOR, PUERTO);
+            leerFlujoEntradaSalida(info, 10);
+            cerrarFlujos();
+            desconectar();
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public String buscarIngresosCentral() {
+        String respuesta = null;
+        try {
+            conectar(IP_SERVIDOR, PUERTO);
+            respuesta = leerFlujoEntradaSalida("",11);
+            cerrarFlujos();
+            desconectar();
+
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
     }
 
 }

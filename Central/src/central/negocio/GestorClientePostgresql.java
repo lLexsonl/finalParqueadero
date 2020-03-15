@@ -100,4 +100,36 @@ public class GestorClientePostgresql {
         return list;
     }
     
+    public void agregarIngreso(String placa, String id, String puesto, String fingreso) throws ClassNotFoundException, SQLException  {
+        System.out.println(String.format("Insertar en ingreso postgresql: %s, %s ,%s ,%s", placa, id, puesto, fingreso));
+        connector.conectarse();
+        connector.actualizar("INSERT INTO ingreso"
+                + " VALUES ("
+                + "'" + placa + "',"
+                + "'" + puesto + "',"
+                + "'" + id + "',"
+                + "'" + fingreso + "',"
+                + "NULL"
+                + ")");
+        connector.desconectarse();
+    }
+    
+    public List<Ingreso> buscarIngresos() throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.crearConsulta("Select * from ingreso where fechasalida is null");
+        List<Ingreso> list = new ArrayList<>();
+        
+        while(connector.getResultado().next()) {
+            Ingreso ing = new Ingreso(
+                    connector.getResultado().getString("placa_vehi"),
+                    connector.getResultado().getString("id_cli"),
+                    connector.getResultado().getString("id_puesto"),
+                    connector.getResultado().getString("fechaIngreso"),
+                    connector.getResultado().getString("fechaSalida"));
+            list.add(ing);
+        }
+        connector.desconectarse();
+        return list;
+    }
+    
 }

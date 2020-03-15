@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import mvcf.AModel;
 import com.google.gson.Gson;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 import parqueadero.acceso.ICentral;
 import parqueadero.acceso.IFabricaServicioCentral;
 
@@ -199,6 +201,29 @@ public class GestorClientes extends AModel {
         return list;
     }
     /**
+     * Busca los datos de los ingresos que no poseen fecha de salida
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
+    public List<Ingreso> buscarIngresosCentral() throws ClassNotFoundException, SQLException {
+        String json = central.buscarIngresosCentral();
+        System.out.println("Json ingresar: " + json);
+        if (!json.equals("NO_ENCONTRADO")) {
+            //Lo encontró
+            
+            Ingreso[] ingresos = parseToIngresos(json);
+            List<Ingreso> list = Arrays.stream(ingresos).collect(Collectors.toList());
+            return list;
+        }
+        return null;
+    }
+    
+    private Ingreso[] parseToIngresos(String json) {
+        Ingreso[] array = new Gson().fromJson(json, Ingreso[].class);
+        return array;
+    }
+    /**
      * Registra el ingreso de un vehiculo en el parqueadero
      * @param placa placa del vehiculo que se desea ingresar
      * @param id
@@ -221,6 +246,23 @@ public class GestorClientes extends AModel {
                 + "NULL"
                 + ")");
         conector.desconectarse();
+        this.notificar();
+    }
+    
+    /**
+     * Registra el ingreso de un vehiculo en el parqueadero
+     * @param placa placa del vehiculo que se desea ingresar
+     * @param id
+     * @param puesto
+     * @param fingreso
+     * @param fsalida
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
+    
+    public void agregarIngresoCentral(String placa, String id, String puesto, String fingreso) throws ClassNotFoundException, SQLException  {
+        puesto = (Integer.parseInt(puesto) < 10)?("0" +puesto): puesto;
+        central.insertarIngreso(String.format("%s,%s,P_%s,%s", placa, id, puesto, fingreso));
         this.notificar();
     }
     

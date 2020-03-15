@@ -2,7 +2,7 @@ package parqueadero.acceso;
 
 /**
  *
- * @author ahurtado
+ * @author ahurtado, adrian
  */
 public interface ICentral {
 
@@ -15,5 +15,7 @@ public interface ICentral {
     public void IngresarClienteVehiculoEnLaCentral(String info);
     public String obtenerClientesVehiculosDeLaCentral(String id);
     public void ingresarMulta(String sql);
+    public void insertarIngreso(String info);
+    public String buscarIngresosCentral();
     
 }
