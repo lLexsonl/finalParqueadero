@@ -59,10 +59,10 @@ public class GestorClienteVehiculo {
         }
         return null;
     }
-    public void IngresarClienteVehiculoCentral(String info) {
+    
+    public String IngresarClienteVehiculoCentral(String info) {
         //Obtiene el objeto json serializado al servidor de la registraduria
-         central.IngresarClienteVehiculoEnLaCentral(info);
-        
+         return central.IngresarClienteVehiculoEnLaCentral(info);
     }
     
     private ClienteVehiculoPost[] parseToClienteVehiculo(String json) {

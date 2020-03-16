@@ -1,5 +1,7 @@
 package parqueadero.clientemain;
 
+import java.util.TimerTask;
+import java.util.Timer;
 import parqueadero.acceso.FabricaServicioCentralSocket;
 import parqueadero.acceso.IFabricaServicioCentral;
 import parqueadero.negocio.GestorClientes;
@@ -30,7 +32,17 @@ public class RunMVC {
         gestor.addView(mapa);
         gestor.notificar();
         mapa.setVisible(true);
+        /*
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                gestor.notificar();
+            }
+        };
         
+        timer.scheduleAtFixedRate(timerTask, 0, 10000);
+        */
         // SEGUNDA VISTA
         //GUIClientesVer view2 = new GUIClientesVer();
         //gestor.addView(view2);

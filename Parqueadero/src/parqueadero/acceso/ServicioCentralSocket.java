@@ -40,7 +40,7 @@ public class ServicioCentralSocket implements ICentral {
     }
 
     @Override
-    public void IngresarVehiculoEnLaCentral(String info) {
+    public String IngresarVehiculoEnLaCentral(String info) {
 
         String respuesta = null;
         try {
@@ -51,11 +51,12 @@ public class ServicioCentralSocket implements ICentral {
         } catch (IOException ex) {
             Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return respuesta;
 
     }
 
     @Override
-    public void IngresarClienteVehiculoEnLaCentral(String info) {
+    public String IngresarClienteVehiculoEnLaCentral(String info) {
 
         String respuesta = null;
         try {
@@ -66,6 +67,7 @@ public class ServicioCentralSocket implements ICentral {
         } catch (IOException ex) {
             Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return respuesta;
 
     }
 
@@ -168,10 +170,10 @@ public class ServicioCentralSocket implements ICentral {
                 salidaDecorada.println("buscarClienteVehiculo," + id);
                 break;
             case 6:
-                salidaDecorada.println("consultarVehiculo," + id);
+                salidaDecorada.println("buscarVehiculo," + id);
                 break;
             case 7:
-                salidaDecorada.println("ingresarClienteVehiculo," + id);
+                salidaDecorada.println("inserarClienteVehiculo," + id);
                 break;
             case 8:
                 salidaDecorada.println("buscarClienteVehiculo," + id);

@@ -10,20 +10,14 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import central.negocio.Cliente;
 import central.negocio.ClientePost;
-import central.negocio.ClienteVehiculo;
 import central.negocio.ClienteVehiculoPost;
 import central.negocio.GestorClientePostgresql;
 import central.negocio.Ingreso;
 import central.negocio.UsuarioPost;
-import central.negocio.Vehiculo;
-import central.negocio.Vigilante;
+import central.negocio.VehiculoPost;
 import com.google.gson.JsonArray;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CentralServerPost implements Runnable {
 
@@ -231,6 +225,22 @@ public class CentralServerPost implements Runnable {
             case "editarSalida":
                 gestor.editarSalida(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
                 break;
+                
+            case "ingresarVehiculo":
+                gestor.insertarVehiculo(parametros[1], parametros[2], parametros[3], parametros[4]);
+                salidaDecorada.println("OK");
+                break;
+            case "buscarVehiculo":
+                VehiculoPost vehi = gestor.buscarVehiculo(parametros[1]);
+                if(vehi != null) {
+                    salidaDecorada.println(vehi.toJson());
+                } else {
+                    salidaDecorada.println("NO_ENCONTRADO");
+                }
+                break;
+            case "inserarClienteVehiculo":
+                gestor.insertarClienteVehiculo(parametros[1], parametros[2]);
+                salidaDecorada.println("OK");
         }
     }
 
@@ -243,21 +253,6 @@ public class CentralServerPost implements Runnable {
         salidaDecorada.close();
         entradaDecorada.close();
         socket.close();
-    }
-
-    /**
-     * Convierte el objeto Ciudadano a json
-     *
-     * @param ciu Objeto ciudadano
-     * @return cadena json
-     */
-    private String parseToJSON(Vehiculo vehi) {
-        JsonObject jsonobj = new JsonObject();
-        jsonobj.addProperty("idVehiculo", vehi.getIdvehiculo());
-        jsonobj.addProperty("placa", vehi.getNodeplaca());
-        jsonobj.addProperty("marca", vehi.getMarca());
-        jsonobj.addProperty("tipo", vehi.getTipo());
-        return jsonobj.toString();
     }
 
     private String serializarVehiculosCliente(List<ClienteVehiculoPost> listado) {
@@ -292,43 +287,5 @@ public class CentralServerPost implements Runnable {
         }
         //System.out.println("Planes json serializado: " + array.toString());
         return array.toString();
-    }
-
-    private String parseToJSON(ClienteVehiculo clive) {
-        JsonObject jsonobj = new JsonObject();
-        jsonobj.addProperty("idCliente", clive.getIdCliente());
-        jsonobj.addProperty("nombre", clive.getNombre());
-        jsonobj.addProperty("apellido", clive.getApellido());
-        jsonobj.addProperty("genero", clive.getGenero());
-        jsonobj.addProperty("fechaNacimiento", clive.getFechaNacimiento());
-        jsonobj.addProperty("idVehiculo", clive.getIdvehiculo());
-        jsonobj.addProperty("placa", clive.getNodeplaca());
-        jsonobj.addProperty("marca", clive.getMarca());
-        jsonobj.addProperty("tipoVehiculo", clive.getTipo());
-        return jsonobj.toString();
-    }
-
-    private String parseToJSON(Cliente cli) {
-        JsonObject jsonobj = new JsonObject();
-        jsonobj.addProperty("idCliente", cli.getIdCliente());
-        jsonobj.addProperty("nombre", cli.getNombre());
-        jsonobj.addProperty("apellido", cli.getApellido());
-        jsonobj.addProperty("genero", cli.getGenero());
-        jsonobj.addProperty("fechaNacimiento", cli.getFechaNacimiento());
-        jsonobj.addProperty("rol", cli.getRol());
-        return jsonobj.toString();
-    }
-
-    private String parseToJSON(Vigilante vig) {
-        JsonObject jsonobj = new JsonObject();
-        jsonobj.addProperty("numeroid", vig.getNumeroid());
-        jsonobj.addProperty("codigo", vig.getCodigo());
-        jsonobj.addProperty("nombres", vig.getNombre());
-        jsonobj.addProperty("apellido", vig.getApellido());
-        jsonobj.addProperty("genero", vig.getGenero());
-        jsonobj.addProperty("fechadenacimiento", vig.getFechadenacimiento());
-        jsonobj.addProperty("empresa", vig.getEmpresa());
-        jsonobj.addProperty("claveacceso", vig.getClaveacceso());
-        return jsonobj.toString();
     }
 }

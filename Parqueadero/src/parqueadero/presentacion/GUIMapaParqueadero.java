@@ -10,12 +10,11 @@ import mvcf.AView;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.negocio.Ingreso;
 import parqueadero.utils.Utilidades;
-
 /**
  *
  * @author Yerson
  */
-public class GUIMapaParqueadero extends javax.swing.JFrame implements AView{
+public class GUIMapaParqueadero extends javax.swing.JFrame implements AView {
 
     /**
      * Creates new form GUIMapaParqueadero
@@ -681,5 +680,6 @@ public class GUIMapaParqueadero extends javax.swing.JFrame implements AView{
         listButtons.get(Integer.parseInt(array[1]) - 1).setBackground(Color.GREEN);
         }
         }*/
+        
     }
 }

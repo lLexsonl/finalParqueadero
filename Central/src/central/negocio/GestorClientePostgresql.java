@@ -139,4 +139,31 @@ public class GestorClientePostgresql {
         connector.desconectarse();
     }
     
+    public void insertarVehiculo(String placa, String marca, String tipo, String color) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.actualizar(String.format("INSERT INTO VEHICULO VALUES ('%s','%s','%s','%s')", placa, marca, tipo, color));
+        connector.desconectarse();
+    }
+    
+    public VehiculoPost buscarVehiculo(String placa) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.crearConsulta(String.format("SELECT * FROM VEHICULO WHERE PLACA_VEHI='%s'", placa));
+        VehiculoPost vehi = null;
+        if(connector.getResultado().next()) {
+            vehi = new VehiculoPost(
+                    connector.getResultado().getString("placa_vehi"),
+                    connector.getResultado().getString("marca_vehi"),
+                    connector.getResultado().getString("tipo_vehi"),
+                    connector.getResultado().getString("color_vehi")
+            );
+        }
+        connector.desconectarse();
+        return vehi;
+    }
+    
+    public void insertarClienteVehiculo(String id, String placa) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.actualizar(String.format("INSERT INTO CLIENTEVEHICULO VALUES ('%s','%s')", id, placa));
+        connector.desconectarse();
+    }
 }

@@ -19,6 +19,7 @@ import parqueadero.negocio.GestorClienteVehiculo;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.negocio.GestorVehiculo;
 import parqueadero.negocio.Vehiculo;
+import parqueadero.negocio.VehiculoPost;
 import parqueadero.utils.Utilidades;
 
 /**
@@ -62,6 +63,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -102,12 +104,12 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         Femenino = new javax.swing.JRadioButton();
         Masculino = new javax.swing.JRadioButton();
         jPanel16 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        FechaCli = new com.toedter.calendar.JCalendar();
-        jPanel21 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         roling = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        FechaCli = new com.toedter.calendar.JCalendar();
+        jPanel21 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jPanel22 = new javax.swing.JPanel();
@@ -122,6 +124,9 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jPanel26 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         TipoCBox = new javax.swing.JComboBox<>();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        txtColorVehi = new javax.swing.JTextField();
         jPanel27 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
@@ -130,11 +135,11 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jLabel15 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        txtIdClienteJoin = new javax.swing.JTextField();
+        txtIdClienteAsoc = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtPlacaJoin = new javax.swing.JTextField();
+        txtPlacaAsoc = new javax.swing.JTextField();
         jPanel33 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        btnAsociacion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -311,15 +316,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel9.add(jPanel20);
 
-        jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 18, 5));
-
-        jLabel8.setText("Fecha de nacimiento:");
-        jPanel16.add(jLabel8);
-        jPanel16.add(FechaCli);
-
-        jPanel9.add(jPanel16);
-
-        jPanel21.setLayout(new java.awt.GridLayout(2, 0));
+        jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 30, 5));
 
         jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 18, 5));
 
@@ -330,7 +327,15 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         roling.setPreferredSize(new java.awt.Dimension(150, 50));
         jPanel17.add(roling);
 
-        jPanel21.add(jPanel17);
+        jPanel16.add(jPanel17);
+
+        jLabel8.setText("Fecha de nacimiento:");
+        jPanel16.add(jLabel8);
+        jPanel16.add(FechaCli);
+
+        jPanel9.add(jPanel16);
+
+        jPanel21.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
         jButton3.setText("Registrar");
@@ -349,7 +354,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jTabbedPane1.addTab("Gestión Usuarios", jPanel9);
 
-        jPanel22.setLayout(new java.awt.GridLayout(5, 0));
+        jPanel22.setLayout(new java.awt.GridLayout(6, 0, 0, 15));
 
         jPanel23.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -381,12 +386,20 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jLabel12.setText("Tipo:");
         jPanel26.add(jLabel12);
 
-        TipoCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Moto", "Carro" }));
+        TipoCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Moto", "Auto" }));
         jPanel26.add(TipoCBox);
 
         jPanel22.add(jPanel26);
 
-        jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25));
+        jPanel13.setLayout(new java.awt.GridLayout(1, 2));
+
+        jLabel16.setText("Color:");
+        jPanel13.add(jLabel16);
+        jPanel13.add(txtColorVehi);
+
+        jPanel22.add(jPanel13);
+
+        jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
         jButton5.setText("Registrar");
@@ -404,7 +417,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel28.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel29.setLayout(new java.awt.BorderLayout(0, 50));
+        jPanel29.setLayout(new java.awt.BorderLayout(0, 10));
 
         jPanel31.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
 
@@ -415,28 +428,41 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel29.add(jPanel31, java.awt.BorderLayout.NORTH);
 
-        jPanel30.setLayout(new java.awt.GridLayout(2, 2, 0, 80));
+        jPanel30.setLayout(new java.awt.GridBagLayout());
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Número de identificación:");
-        jPanel30.add(jLabel14);
-        jPanel30.add(txtIdClienteJoin);
+        jPanel30.add(jLabel14, new java.awt.GridBagConstraints());
 
+        txtIdClienteAsoc.setPreferredSize(new java.awt.Dimension(200, 50));
+        jPanel30.add(txtIdClienteAsoc, new java.awt.GridBagConstraints());
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Placa de Vehiculo:");
-        jPanel30.add(jLabel13);
-        jPanel30.add(txtPlacaJoin);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel30.add(jLabel13, gridBagConstraints);
+
+        txtPlacaAsoc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPlacaAsoc.setPreferredSize(new java.awt.Dimension(200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        jPanel30.add(txtPlacaAsoc, gridBagConstraints);
 
         jPanel29.add(jPanel30, java.awt.BorderLayout.CENTER);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
-        jButton6.setText("Realizar Asociación");
-        jButton6.setMinimumSize(new java.awt.Dimension(20, 7));
-        jButton6.setPreferredSize(new java.awt.Dimension(250, 50));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnAsociacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
+        btnAsociacion.setText("Realizar Asociación");
+        btnAsociacion.setMinimumSize(new java.awt.Dimension(20, 7));
+        btnAsociacion.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnAsociacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnAsociacionActionPerformed(evt);
             }
         });
-        jPanel33.add(jButton6);
+        jPanel33.add(btnAsociacion);
 
         jPanel29.add(jPanel33, java.awt.BorderLayout.SOUTH);
 
@@ -659,10 +685,18 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         GestorVehiculo gestor = new GestorVehiculo();
         String info;
 
-        info = Placatxt.getText() + "," + Marcatxt.getText() + "," + TipoCBox.getSelectedItem().toString();
+        info = String.format("%s,%s,%s,%s",Placatxt.getText().toUpperCase().trim(),
+                Marcatxt.getText().toUpperCase().trim(),
+                TipoCBox.getSelectedItem().toString().toUpperCase(), 
+                txtColorVehi.getText().toUpperCase().trim());
 
-        gestor.IngresarVehiculoCentral(info);
-        Utilidades.mensajeExito("Se registro un nuevo vehiculo en la central", "Gestión Vehiculos");
+        String respuesta = gestor.IngresarVehiculoCentral(info);
+        if(respuesta.equals("OK")) {
+            Utilidades.mensajeExito("Se registro un nuevo vehiculo en la central", "Gestión Vehiculos");
+        } else {
+            Utilidades.mensajeError(String.format("NO se registro el vehiculo en la central\n%s", respuesta), "Gestión Vehiculos");
+        }
+        
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -670,31 +704,31 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRetirarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnAsociacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociacionActionPerformed
         // Gestion De Asociaciones
-        String uno = txtIdClienteJoin.getText();
-        String dos = txtPlacaJoin.getText();
+        String id = txtIdClienteAsoc.getText().trim();
+        String placa = txtPlacaAsoc.getText().toUpperCase().trim();
 
         //validacion De datos
         GestorClientes gestcli = new GestorClientes();
-        Cliente aux1 = gestcli.buscarClienteCentral(uno);
-        if (aux1 != null) {
-            GestorVehiculo gestVehi = new GestorVehiculo();
-            Vehiculo aux2 = gestVehi.buscarVehiculoCentral(dos);
-            if (aux2 != null) {
-
-                Utilidades.mensajeExito("Datos Validos", "Exito");
-
-                String info = "" + aux1.getIdCliente() + "," + aux2.getIdvehiculo();
+        Cliente aux1 = gestcli.buscarClienteCentral(id);
+        GestorVehiculo gestVehi = new GestorVehiculo();
+        VehiculoPost aux2 = gestVehi.buscarVehiculoCentral(placa);
+        
+        if (aux1 != null && aux2 != null) {
+                Utilidades.mensajeExito("Datos Validos", "Asociación");
+                String info = String.format("%s,%s",id, placa);
                 GestorClienteVehiculo gestclive = new GestorClienteVehiculo();
-                gestclive.IngresarClienteVehiculoCentral(info);
-                Utilidades.mensajeExito("Se realizó la asociación", "Exito");
-            }
+                String respuessta = gestclive.IngresarClienteVehiculoCentral(info);
+                if(respuessta.equals("OK"))
+                    Utilidades.mensajeExito("Se realizó la asociación", "Asociación");
+                else
+                    Utilidades.mensajeError(String.format("Ocurrio un erro en la central: %s", respuessta), "Asociación");
         } else {
-            Utilidades.mensajeError("Datos Invalido", "Error");
+            Utilidades.mensajeError("Datos NO validos", "Asociación");
         }
 
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnAsociacionActionPerformed
 
     public boolean validarFormulario() {
         if (this.getId().equals("")) {
@@ -872,6 +906,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JRadioButton Masculino;
     private javax.swing.JTextField Placatxt;
     private javax.swing.JComboBox<String> TipoCBox;
+    private javax.swing.JButton btnAsociacion;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnRetirar;
@@ -883,7 +918,6 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -891,6 +925,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -908,6 +943,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -953,12 +989,13 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JComboBox<String> roling;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTable tblIngresoRetirar;
+    private javax.swing.JTextField txtColorVehi;
     private javax.swing.JTextField txtCrearCliApe;
     private javax.swing.JTextField txtCrearCliNombre;
     private javax.swing.JTextField txtCrearUsuId;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIdClienteJoin;
-    private javax.swing.JTextField txtPlacaJoin;
+    private javax.swing.JTextField txtIdClienteAsoc;
+    private javax.swing.JTextField txtPlacaAsoc;
     private javax.swing.JTextField txt_des_mul;
     private javax.swing.JTextField txt_placa_mul;
     private javax.swing.JTextField txt_url_multa;

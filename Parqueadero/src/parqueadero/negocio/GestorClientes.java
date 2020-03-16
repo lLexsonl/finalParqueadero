@@ -11,7 +11,6 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import parqueadero.acceso.ICentral;
 import parqueadero.acceso.IFabricaServicioCentral;
-import parqueadero.utils.Utilidades;
 
 /**
  * Representa el modelo (Observable) de datos Cuando hay cambios en el estado,

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package parqueadero.negocio;
 
 /**
@@ -115,8 +110,7 @@ public class ClienteVehiculo {
         return "ClienteVehiculo{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + ", idvehiculo=" + idvehiculo + ", nodeplaca=" + nodeplaca + ", marca=" + marca + ", tipoVehiculo=" + tipoVehiculo + '}';
     }
     
-    
-    
+    //TODO: CAMBIAR CENTRAL CLIENTEVEHICULO
     
 }
 

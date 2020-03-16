@@ -8,6 +8,7 @@ import parqueadero.negocio.GestorVehiculo;
 import parqueadero.negocio.GestorVehiculo;
 import parqueadero.negocio.Vehiculo;
 import parqueadero.negocio.Vehiculo;
+import parqueadero.negocio.VehiculoPost;
 
 /**
  *
@@ -33,8 +34,8 @@ public class TestGestorVehiculo {
         GestorVehiculo gv=new GestorVehiculo();
         gv.IngresarVehiculoCentral(nodeplaca+","+marca+","+tipo);
         
-        Vehiculo v=gv.buscarVehiculoCentral(nodeplaca);
-        assertEquals(nodeplaca,v.getNodeplaca());
+        VehiculoPost v=gv.buscarVehiculoCentral(nodeplaca);
+        assertEquals(nodeplaca,v.getPlaca_vehi());
         
     }
 }
