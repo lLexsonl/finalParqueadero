@@ -17,5 +17,6 @@ public interface ICentral {
     public void ingresarMulta(String sql);
     public void insertarIngreso(String info);
     public String buscarIngresosCentral();
+    public String editarSalidaCentral(String info);
     
 }

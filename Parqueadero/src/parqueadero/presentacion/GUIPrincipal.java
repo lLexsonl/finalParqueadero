@@ -311,7 +311,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel9.add(jPanel20);
 
-        jPanel16.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 18, 5));
 
         jLabel8.setText("Fecha de nacimiento:");
         jPanel16.add(jLabel8);
@@ -321,12 +321,13 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel21.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel17.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 18, 5));
 
         jLabel7.setText("Rol:");
         jPanel17.add(jLabel7);
 
         roling.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "estudiante", "docente", "administrativo" }));
+        roling.setPreferredSize(new java.awt.Dimension(150, 50));
         jPanel17.add(roling);
 
         jPanel21.add(jPanel17);

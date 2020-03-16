@@ -95,6 +95,7 @@ public class CentralServerPost implements Runnable {
         } catch (IOException e) {
             System.out.println(e);
         } catch (ClassNotFoundException | SQLException ex) {
+            salidaDecorada.println(String.format("HA OCURRIDO UN ERROR: %S", ex.getMessage()));
             Logger.getLogger(CentralServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -216,7 +217,6 @@ public class CentralServerPost implements Runnable {
                 gestor.agregarIngreso(placaing, iding, puestoing, fingresoing);
                 break;
             case "buscarIngresos":
-                
                 List<Ingreso> listIngresos = gestor.buscarIngresos();
                 
                 if (listIngresos.isEmpty()) {
@@ -226,6 +226,10 @@ public class CentralServerPost implements Runnable {
                     String json = serializarIngresos(listIngresos);
                     salidaDecorada.println(json);
                 }
+                break;
+                
+            case "editarSalida":
+                gestor.editarSalida(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
                 break;
         }
     }

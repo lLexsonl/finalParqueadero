@@ -132,4 +132,11 @@ public class GestorClientePostgresql {
         return list;
     }
     
+    public void editarSalida(String placa, String id, String puesto, String fingreso, String fsalida) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.actualizar(String.format("UPDATE INGRESO SET fechasalida='%s' WHERE placa_vehi='%s' and id_puesto = '%s' and id_cli = '%s' and fechaingreso = '%s'",
+                fsalida, placa, puesto, id, fingreso) );
+        connector.desconectarse();
+    }
+    
 }

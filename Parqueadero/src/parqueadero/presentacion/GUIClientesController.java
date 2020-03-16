@@ -108,7 +108,7 @@ public class GUIClientesController extends AActionController {
                     String id, placa;//, fingreso;
 
                     id = String.valueOf(vista.getTblIngresoRetirar().getValueAt(indexj, 0));
-                    placa = String.valueOf(vista.getTblIngresoRetirar().getValueAt(indexj, 3));
+                    placa = String.valueOf(vista.getTblIngresoRetirar().getValueAt(indexj, 4));
                     //fingreso = Utilidades.fechaAcual();//"19/02/2020";
                     
                     if (salidaValida(id, placa)) {
@@ -116,15 +116,6 @@ public class GUIClientesController extends AActionController {
                     } else {
                         Utilidades.mensajeError("NO se realizó la salida del vehivulo", "Salida");
                     }
-
-                    //eliminarCliente();
-                    /*
-                try {
-                    gestor.editarSalida(id, placa, puesto, fingreso, fsalida);
-                } catch(SQLException | ClassNotFoundException ex) {
-                    System.out.println(ex.getMessage());
-                }
-                     */
                     break;
                 }
                 //</editor-fold>
@@ -239,15 +230,17 @@ public class GUIClientesController extends AActionController {
     public boolean salidaValida(String id, String placa) {
 
         boolean valido = false;
-        String fsalida = Utilidades.fechaAcual();//"21/02/2020";
+        String fsalida = Utilidades.fechaAcualConFormato();//"21/02/2020";
 
         try {
-            List<Ingreso> list = gestor.buscarIngresos();
-
+            List<Ingreso> list = gestor.buscarIngresosCentral();
+            System.out.println("Estoy en validar la salida");
             for (Ingreso i : list) {
+                System.out.println(i.toString());
                 if (id.equals(i.getId()) && placa.equals(i.getPlaca())) {
-                    gestor.editarSalida(id, placa, i.getPuesto(), i.getPingreso(), fsalida);
-                    valido = true;
+                    String respuesta = gestor.editarSalidaCentral(id, placa, i.getPuesto(), i.getPingreso(), fsalida);
+                    if(respuesta.isEmpty())
+                        valido = true;
                     break;
                 }
             }

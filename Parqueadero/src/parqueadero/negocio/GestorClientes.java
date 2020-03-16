@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import parqueadero.acceso.ICentral;
 import parqueadero.acceso.IFabricaServicioCentral;
+import parqueadero.utils.Utilidades;
 
 /**
  * Representa el modelo (Observable) de datos Cuando hay cambios en el estado,
@@ -313,6 +314,13 @@ public class GestorClientes extends AModel {
                 fsalida, placa, fingreso));
         conector.desconectarse();
         this.notificar();
+    }
+    public String editarSalidaCentral(String id, String placa, String puesto, String fingreso, String fsalida) throws ClassNotFoundException, SQLException {
+        String respuesta = central.editarSalidaCentral(String.format("%s,%s,%s,%s,%s", placa, id, puesto, fingreso, fsalida));
+        if(respuesta.isEmpty()) {
+            this.notificar();
+        }
+        return respuesta;
     }
     /**
      * Envia la información de la multa para que la cetral la cree
