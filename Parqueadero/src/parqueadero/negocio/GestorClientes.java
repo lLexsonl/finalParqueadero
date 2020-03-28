@@ -73,9 +73,9 @@ public class GestorClientes extends AModel {
         return null;
     }
     
-    public void IngresarClienteCentral(String id) {
+    public String IngresarClienteCentral(String id) {
         //Obtiene el objeto json serializado al servidor de la registraduria
-         central.IngresarClienteEnLaCentral(id);
+         return central.IngresarClienteEnLaCentral(id);
     }
     
     /**
@@ -328,8 +328,26 @@ public class GestorClientes extends AModel {
      * @param url
      * @param fecha 
      */
-    public void crearMulta(String placa, String desc, String url, String fecha) {
-        this.central.ingresarMulta(String.format("%s,%s,%s,%s", placa, desc, url, fecha));
+    public String crearMulta(String id, String placa, String desc, String url, String fecha) {
+        return central.ingresarMulta(String.format("%s,%s,%s,%s,%s", id, placa, desc, url, fecha));
+    }
+    
+    public List<Multa> buscarMultas(String placa) {
+        
+        String json = central.buscarMultas(placa);
+        System.out.println("json que viene de lqa central multa: " + json);
+        if(!json.equals("NO_ENCONTRADO")) {
+            return deserializarMultas(json);
+        }
+        return null;
+        
+    }
+    
+    private List<Multa> deserializarMultas(String json) {
+        Multa[] array = new Gson().fromJson(json, Multa[].class);
+        
+        List<Multa> list = Arrays.stream(array).collect(Collectors.toList());
+        return list;
     }
     
 }

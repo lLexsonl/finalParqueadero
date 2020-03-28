@@ -25,9 +25,9 @@ public class ServicioCentralSocket implements ICentral {
      *
      */
     @Override
-    public void IngresarClienteEnLaCentral(String info) {
+    public String IngresarClienteEnLaCentral(String info) {
 
-        String respuesta;
+        String respuesta = "";
         try {
             conectar(IP_SERVIDOR, PUERTO);
             respuesta = leerFlujoEntradaSalida(info, 3);
@@ -36,6 +36,7 @@ public class ServicioCentralSocket implements ICentral {
         } catch (IOException ex) {
             Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return respuesta;
 
     }
 
@@ -190,6 +191,12 @@ public class ServicioCentralSocket implements ICentral {
             case 12:
                 salidaDecorada.println("editarSalida," + id);
                 break;
+            case 13:
+                salidaDecorada.println("buscarMultas,"+ id);
+                break;
+            case 14:
+                salidaDecorada.println("insertarUsuario," + id);
+                break;
             default:
                 Utilidades.mensajeError("Opción NO valida", "Comunicación con el servidor");
                 break;
@@ -220,15 +227,17 @@ public class ServicioCentralSocket implements ICentral {
     }
 
     @Override
-    public void ingresarMulta(String sql) {
+    public String ingresarMulta(String sql) {
+        String respuesta = null;
         try {
             conectar(IP_SERVIDOR, PUERTO);
-            leerFlujoEntradaSalida(sql, 9);
+            respuesta = leerFlujoEntradaSalida(sql, 9);
             cerrarFlujos();
             desconectar();
         } catch (IOException ex) {
             Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return respuesta;
     }
 
     @Override
@@ -272,4 +281,31 @@ public class ServicioCentralSocket implements ICentral {
         return respuesta;
     }
 
+    @Override
+    public String buscarMultas(String info) {
+        String respuesta = "";
+        try {
+            conectar(IP_SERVIDOR, PUERTO);
+            respuesta = leerFlujoEntradaSalida(info, 13);
+            cerrarFlujos();
+            desconectar();
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;        
+    }
+
+    @Override
+    public String insertarUsuario(String info) {
+        String respuesta = "";
+        try {
+            conectar(IP_SERVIDOR, PUERTO);
+            respuesta = leerFlujoEntradaSalida(info, 14);
+            cerrarFlujos();
+            desconectar();
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta; 
+    }
 }

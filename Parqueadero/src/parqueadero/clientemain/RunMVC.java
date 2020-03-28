@@ -60,6 +60,9 @@ public class RunMVC {
         
         view1.getBtnMultar().addActionListener(control);
         view1.getBtnMultar().setActionCommand("MULTAR");
+        
+        view1.getBtnBuscarMulta().addActionListener(control);
+        view1.getBtnBuscarMulta().setActionCommand("BUSCAR_MULTA");
     }
 }
 

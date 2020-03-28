@@ -26,37 +26,6 @@ public class GestorVigilante extends AModel {
                 
     }
     
-    //<editor-fold defaultstate="collapsed" desc="comment">
-    /*
-     private void parseToVigilante(Vigilante vigilante, String json) {
-        Gson gson = new Gson();
-        Properties properties = gson.fromJson(json, Properties.class);
-        
-        vigilante.setNumeroid(properties.getProperty("numeroid"));
-        vigilante.setCodigo(properties.getProperty("codigo"));
-        vigilante.setNombre(properties.getProperty("nombre"));
-        vigilante.setApellido(properties.getProperty("apellido"));
-        vigilante.setGenero(properties.getProperty("genero"));
-        vigilante.setFechadenacimiento(properties.getProperty("fechadenacimiento"));
-        vigilante.setEmpresa(properties.getProperty("empresa"));
-        vigilante.setClaveacceso(properties.getProperty("claveacceso"));
-        
-    }
-    
-    public Vigilante buscarVigilanteCentral(String id) {
-        //Obtiene el objeto json serializado al servidor de la registraduria
-        String json = Central.obtenerVigilanteDeLaCentral(id);
-        if (!json.equals("NO_ENCONTRADO")) {
-            //Lo encontró
-            Vigilante vig = new Vigilante();
-            parseToVigilante(vig, json);
-            return vig;
-        }
-        return null;
-    }
-    */
-//</editor-fold>
-   
     public UsuarioPost buscarVigilanteCentral(String id) {
         //Obtiene el objeto json serializado al servidor de la registraduria
         String json = Central.obtenerVigilanteDeLaCentral(id);
@@ -69,6 +38,10 @@ public class GestorVigilante extends AModel {
         }
         System.out.println("NO encontro el vigilante");
         return null;
+    }
+    
+    public String insertarUsuario(String info){
+        return Central.insertarUsuario(info);
     }
     
     private void jsonToUsu(UsuarioPost usu, String json) {

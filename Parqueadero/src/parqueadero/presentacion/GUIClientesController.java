@@ -15,6 +15,7 @@ import mvcf.AActionController;
 import mvcf.AModel;
 import mvcf.AView;
 import parqueadero.negocio.Ingreso;
+import parqueadero.negocio.Multa;
 
 /**
  *
@@ -120,18 +121,45 @@ public class GUIClientesController extends AActionController {
                 }
                 //</editor-fold>
             case "MULTAR":
+                //<editor-fold defaultstate="collapsed" desc="Funcionalidad MULTAR">
+                
                 System.out.println("Estoy en multar");
                 
-                String placa, des, url, fecha;
-                
-                placa = vista.getTxt_placa_mul();
+                String id, placa, des, url, fecha;
+                id = vista.getTxtNoMulta().trim();
+                if(Utilidades.isNumeric(id)) {
+                placa = vista.getTxt_placa_mul().trim().toUpperCase();
                 des = vista.getTxt_des_mul();
                 url = vista.getTxt_url_multa();
                 fecha = Utilidades.fechaAcualConFormato();
                 
-                gestor.crearMulta(placa, des, url, fecha);
+                String respuesta = gestor.crearMulta(id, placa, des, url, fecha);
+                
+                if(respuesta.equals("OK")) {
+                    Utilidades.mensajeExito("Se creó la multa con éxito", "Crear Multa");
+                } else {
+                    Utilidades.mensajeError(String.format("NO se creó la multa, error: %s%n", respuesta), "Crear Multa");
+                }
+                } else {
+                    Utilidades.mensajeError("El campo Número multa no es númerico", "Crear Multa");
+                }
                 
                 //gestor.insertarMulta(placa, des, url, fecha);
+                break;
+                //</editor-fold>
+            case "BUSCAR_MULTA":
+                System.out.println("Estoy en buscar multa");
+                
+                String placa_multa = vista.getTxtBuscarMultaPlaca().trim().toUpperCase();
+                
+                List<Multa> list = gestor.buscarMultas(placa_multa);
+                
+                if(list != null &&!list.isEmpty()) {
+                    Utilidades.mensajeExito("Se encotraron multas asociadas al vehiculo", "Buscar Multas");
+                    vista.fijarCamposTablaMulta(list);
+                } else {
+                    Utilidades.mensajeExito("NO se encotraron multas asociadas al vehiculo", "Buscar Multas");
+                }
                 break;
         }
     }

@@ -35,6 +35,7 @@ public class GestorClientePostgresql {
     }
 
     public void agregarCliente(String idcliente, String nombre, String apellido, String genero, String fechanacimiento, String rol) throws ClassNotFoundException, SQLException {
+        System.out.println(String.format("Insertar cliente: %s %s %s %s %s %s" , idcliente, nombre, apellido, genero, fechanacimiento, rol));
         connector.conectarse();
         connector.actualizar("INSERT INTO cliente"
                 + " VALUES ("
@@ -48,11 +49,11 @@ public class GestorClientePostgresql {
         connector.desconectarse();
     }
 
-    public void agregarMulta(String placa, String desc, String url, String fecha) throws ClassNotFoundException, SQLException {
+    public void agregarMulta(String id, String placa, String desc, String url, String fecha) throws ClassNotFoundException, SQLException {
         connector.conectarse();
         connector.actualizar("INSERT INTO MULTA"
                 + " VALUES ("
-                + "NULL,"
+                + "'" + id + "',"
                 + "'" + placa + "',"
                 + "'" + desc + "',"
                 + "'" + url + "',"
@@ -166,4 +167,41 @@ public class GestorClientePostgresql {
         connector.actualizar(String.format("INSERT INTO CLIENTEVEHICULO VALUES ('%s','%s')", id, placa));
         connector.desconectarse();
     }
+    
+    public List<Multa> buscarMultas(String placa) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.crearConsulta(String.format("SELECT * FROM MULTA WHERE PLACA_VEHI='%s'", placa));
+        
+        List<Multa> list = new ArrayList<>();
+        while(connector.getResultado().next()) {
+            Multa multa = new Multa(
+                    connector.getResultado().getString("nomulta"),
+                    connector.getResultado().getString("placa_vehi"),
+                    connector.getResultado().getString("descripcion_mul"),
+                    connector.getResultado().getString("fotografia_mul"),
+                    connector.getResultado().getString("fecha_mul"),
+                    connector.getResultado().getString("estado_mul")
+            );
+            list.add(multa);
+        }
+        connector.desconectarse();
+        return list;
+    }
+    
+    public void insertarUsuario(String id, String user, String pass) throws ClassNotFoundException, SQLException {
+        System.out.println("insertar usario: " + id + user + pass);
+        connector.conectarse();
+        connector.actualizar(String.format("INSERT INTO USUARIO VALUES ('%s','%s','%s')", id, user, pass));
+        connector.desconectarse();
+    }
+    /*
+    public static void main(String[] args) {
+        GestorClientePostgresql gestor = new GestorClientePostgresql();
+        try{
+            gestor.agregarCliente("1111", "ALAN", "TURIN", "MASCULINO", "11-12-1980", "ADMINISTRADOR");
+            gestor.insertarUsuario("1111", "ALAN", "4321");
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }*/
 }

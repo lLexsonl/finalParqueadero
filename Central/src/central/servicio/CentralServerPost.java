@@ -14,6 +14,7 @@ import central.negocio.ClientePost;
 import central.negocio.ClienteVehiculoPost;
 import central.negocio.GestorClientePostgresql;
 import central.negocio.Ingreso;
+import central.negocio.Multa;
 import central.negocio.UsuarioPost;
 import central.negocio.VehiculoPost;
 import com.google.gson.JsonArray;
@@ -164,12 +165,12 @@ public class CentralServerPost implements Runnable {
                 if (usu == null) {
                     salidaDecorada.println("NO_ENCONTRADO");
                 } else {
-                    System.out.println("usu sale: " + usu.toJson());
                     salidaDecorada.println(usu.toJson());
                 }
                 break;
             case "insertarCliente":
                 gestor.agregarCliente(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5], parametros[6]);
+                salidaDecorada.println("OK");
                 break;
             case "buscarClienteVehiculo":
                 String idcv = parametros[1];
@@ -183,20 +184,23 @@ public class CentralServerPost implements Runnable {
                 }
                 break;
             case "insertarMulta":
-                String placa,
+                String idm,
+                 placa,
                  desc,
                  fecha,
                  url;
                 System.out.println("Llego multa central");
-
-                placa = parametros[1];
-                desc = parametros[2];
-                url = parametros[3];
-                fecha = parametros[4];
+                
+                idm = parametros[1];
+                placa = parametros[2];
+                desc = parametros[3];
+                url = parametros[4];
+                fecha = parametros[5];
 
                 System.out.println("Parametros: " + placa + " " + desc + " " + url + " " + fecha);
 
-                gestor.agregarMulta(placa, desc, url, fecha);
+                gestor.agregarMulta(idm, placa, desc, url, fecha);
+                salidaDecorada.println("OK");
                 break;
             case "insertarIngreso":
                 System.out.println("Estoy en insertar ingreso central");
@@ -209,6 +213,7 @@ public class CentralServerPost implements Runnable {
                 fingresoing = parametros[4];
                 
                 gestor.agregarIngreso(placaing, iding, puestoing, fingresoing);
+                salidaDecorada.println("OK");
                 break;
             case "buscarIngresos":
                 List<Ingreso> listIngresos = gestor.buscarIngresos();
@@ -241,6 +246,20 @@ public class CentralServerPost implements Runnable {
             case "inserarClienteVehiculo":
                 gestor.insertarClienteVehiculo(parametros[1], parametros[2]);
                 salidaDecorada.println("OK");
+                break;
+            case "buscarMultas":
+                System.out.println("Estoy en buscar multas central");
+                List<Multa> listMulta = gestor.buscarMultas(parametros[1]);
+                if(listMulta.isEmpty()) {
+                    salidaDecorada.println("NO_ENCONTRADO");
+                } else {
+                    salidaDecorada.println(serializarMultas(listMulta));
+                }
+                break;
+            case "insertarUsuario":
+                gestor.insertarUsuario(parametros[1], parametros[2], parametros[3]);
+                salidaDecorada.println("OK");
+                break;
         }
     }
 
@@ -283,6 +302,23 @@ public class CentralServerPost implements Runnable {
             jsonobj.addProperty("puesto", ing.getPuesto());
             jsonobj.addProperty("pingreso", ing.getPingreso());
             jsonobj.addProperty("fsalida", ing.getFsalida());
+            array.add(jsonobj);
+        }
+        //System.out.println("Planes json serializado: " + array.toString());
+        return array.toString();
+    }
+    
+    private String serializarMultas(List<Multa> listado) {
+        JsonArray array = new JsonArray();
+        JsonObject jsonobj;
+        for (Multa mul : listado) {
+            jsonobj = new JsonObject();
+            jsonobj.addProperty("nomulta", mul.getNomulta());
+            jsonobj.addProperty("placa_vehi", mul.getPlaca_vehi());
+            jsonobj.addProperty("descripcion_mul", mul.getDescripcion_mul());
+            jsonobj.addProperty("fotografia_mul", mul.getFotografia_mul());
+            jsonobj.addProperty("fecha_mul", mul.getFecha_mul());
+            jsonobj.addProperty("estado_mul", mul.getEstado_mul());
             array.add(jsonobj);
         }
         //System.out.println("Planes json serializado: " + array.toString());

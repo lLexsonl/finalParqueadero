@@ -7,6 +7,8 @@ package parqueadero.presentacion;
 
 import mvcf.AModel;
 import mvcf.AView;
+import parqueadero.clientemain.RunAdmin;
+import parqueadero.clientemain.RunLogin;
 import parqueadero.clientemain.RunMVC;
 import parqueadero.negocio.GestorVigilante;
 import parqueadero.negocio.UsuarioPost;
@@ -17,7 +19,7 @@ import parqueadero.utils.Utilidades;
  * @author Breiner Mamian
  */
 public class GUILogin extends javax.swing.JFrame implements AView {
-    
+
     private Object bean;
 
     /**
@@ -25,10 +27,10 @@ public class GUILogin extends javax.swing.JFrame implements AView {
      */
     public GUILogin() {
         initComponents();
-        this.setSize(250, 390);
-        this.setLocation(70, 70);
+        super.setSize(250, 390);
+        super.setLocation(70, 70);
     }
-    
+
     public void setObject(Object bean) {
         this.bean = bean;
     }
@@ -44,43 +46,46 @@ public class GUILogin extends javax.swing.JFrame implements AView {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTFCodigoVig = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        Clavetxt = new javax.swing.JPasswordField();
+        txtClaveAcceso = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnIngresar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(250, 350));
         setSize(new java.awt.Dimension(0, 0));
-        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setLayout(new java.awt.GridLayout(4, 0));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Código");
+        jLabel2.setText("Usuario");
         jPanel3.add(jLabel2);
-        jPanel3.add(jTFCodigoVig);
+        jPanel3.add(txtUsuario);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Clave Acceso");
         jPanel3.add(jLabel1);
-        jPanel3.add(Clavetxt);
+        jPanel3.add(txtClaveAcceso);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/recibo-entrada.png"))); // NOI18N
-        jButton1.setText("INGRESAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/recibo-entrada.png"))); // NOI18N
+        btnIngresar.setText("INGRESAR");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIngresarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
+        jPanel2.add(btnIngresar);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.SOUTH);
 
@@ -91,40 +96,43 @@ public class GUILogin extends javax.swing.JFrame implements AView {
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling co
         GestorVigilante gestor = new GestorVigilante();
-        String id = jTFCodigoVig.getText().trim();
-        
+        String id = txtUsuario.getText().trim();
+
         if (id.equals("")) {
+            Utilidades.mensajeError("Identificación NO valida.", "Inicio de Sesión");
             return;
         }
         // Busca el cliente en la base de datos Central
         UsuarioPost usu = gestor.buscarVigilanteCentral(id);
-        
-        if (usu==null) {
-            //Si no se encontro el ID del Vigilante.
-            Utilidades.mensajeError("Identificación NO valida.", "Atención");
-        }else{
-            //Validamos ClaveAcceso.
-            if(Clavetxt.getText().trim().equals(usu.getPass_usu())){
-                Utilidades.mensajeExito("Bienvenido.", "Verificado");
-                this.setVisible(false);
-                RunMVC mainRunMVC = new RunMVC();
-            }else{
-                Utilidades.mensajeError("Codigo Invalido.", "Atención");
 
+        if (usu == null) {
+            //Si no se encontro el ID del Vigilante.
+            Utilidades.mensajeError("Identificación NO valida.", "Inicio de Sesión");
+        } else {
+            //Validamos ClaveAcceso.
+            if (txtClaveAcceso.getText().trim().equals(usu.getPass_usu())) {
+                Utilidades.mensajeExito("Bienvenido.", "Inicio de Sesión");
+                this.setVisible(false);
+                if (usu.getUser_usu().equals("SYS")) {
+                    RunAdmin runAdmin = new RunAdmin();
+                } else {
+                    RunMVC mainRunMVC = new RunMVC();
+                }
+            } else {
+                Utilidades.mensajeError("Contraseña NO valida.", "Inicio de Sesión");
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField Clavetxt;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -132,7 +140,8 @@ public class GUILogin extends javax.swing.JFrame implements AView {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTFCodigoVig;
+    private javax.swing.JPasswordField txtClaveAcceso;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
     @Override
