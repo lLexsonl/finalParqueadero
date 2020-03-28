@@ -15,6 +15,7 @@ import central.negocio.ClienteVehiculoPost;
 import central.negocio.GestorClientePostgresql;
 import central.negocio.Ingreso;
 import central.negocio.Multa;
+import central.negocio.ReporteIngreso;
 import central.negocio.UsuarioPost;
 import central.negocio.VehiculoPost;
 import com.google.gson.JsonArray;
@@ -260,6 +261,14 @@ public class CentralServerPost implements Runnable {
                 gestor.insertarUsuario(parametros[1], parametros[2], parametros[3]);
                 salidaDecorada.println("OK");
                 break;
+            case "buscarReporteIngresos":
+                List<ReporteIngreso> reporte = gestor.buscarReporteIngresos(parametros[1]);
+                if (!reporte.isEmpty()) {
+                    salidaDecorada.println(serializarReporte(reporte));
+                } else {
+                    salidaDecorada.println("NO_ENCONTRADO");
+                }
+                break;
         }
     }
 
@@ -319,6 +328,18 @@ public class CentralServerPost implements Runnable {
             jsonobj.addProperty("fotografia_mul", mul.getFotografia_mul());
             jsonobj.addProperty("fecha_mul", mul.getFecha_mul());
             jsonobj.addProperty("estado_mul", mul.getEstado_mul());
+            array.add(jsonobj);
+        }
+        //System.out.println("Planes json serializado: " + array.toString());
+        return array.toString();
+    }
+    private String serializarReporte(List<ReporteIngreso> listado) {
+        JsonArray array = new JsonArray();
+        JsonObject jsonobj;
+        for (ReporteIngreso repo : listado) {
+            jsonobj = new JsonObject();
+            jsonobj.addProperty("fechaIngreso", repo.getFechaIngreso());
+            jsonobj.addProperty("cantidad", repo.getCantidad());
             array.add(jsonobj);
         }
         //System.out.println("Planes json serializado: " + array.toString());

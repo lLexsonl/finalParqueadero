@@ -194,6 +194,26 @@ public class GestorClientePostgresql {
         connector.actualizar(String.format("INSERT INTO USUARIO VALUES ('%s','%s','%s')", id, user, pass));
         connector.desconectarse();
     }
+    
+    public List<ReporteIngreso> buscarReporteIngresos(String placa) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        
+        connector.crearConsulta(String.format("select extract(dow from fechaingreso) as fechaingreso, count(*) as cant from ingreso\n" +
+                                                "where fechaingreso > current_date - 7 and placa_vehi = '%s'\n" +
+                                                "group by extract(dow from fechaingreso);", placa));
+        
+        List<ReporteIngreso> list = new ArrayList<>();
+        
+        while(connector.getResultado().next()) {
+            ReporteIngreso reporte = new ReporteIngreso(
+                    connector.getResultado().getString("fechaingreso"),
+                    connector.getResultado().getString("cant"));
+            list.add(reporte);
+        }
+        connector.desconectarse();
+        return list;
+    }
+    
     /*
     public static void main(String[] args) {
         GestorClientePostgresql gestor = new GestorClientePostgresql();

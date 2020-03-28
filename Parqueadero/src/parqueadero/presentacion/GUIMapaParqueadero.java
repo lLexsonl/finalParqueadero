@@ -650,10 +650,12 @@ public class GUIMapaParqueadero extends javax.swing.JFrame implements AView {
 
         try {
             List<Ingreso> list = gestor.buscarIngresosCentral();
-            list.forEach((i) -> {
+            if(list != null) {
+                list.forEach((i) -> {
                 listButtons.get(Integer.parseInt(i.getPuesto().split("_")[1])-1).setBackground(Color.GREEN);
             });
             pnlMapa.updateUI();
+            }
         } catch (ClassNotFoundException | SQLException e) {
             //System.out.println(e.getMessage());
             Utilidades.mensajeError("Error al actualizar el parqueadero", "Actualizar Mapa");

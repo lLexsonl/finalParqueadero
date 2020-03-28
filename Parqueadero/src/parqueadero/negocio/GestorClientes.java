@@ -350,4 +350,19 @@ public class GestorClientes extends AModel {
         return list;
     }
     
+    public List<ReporteIngreso> buscarReporteIngresos(String placa) {
+        String json = central.buscarReporteIngresos(placa);
+        if(!json.equals("NO_ENCONTRADO")) {
+            return deserializarReporte(json);
+        }
+        return null;
+    }
+    
+    private List<ReporteIngreso> deserializarReporte(String json) {
+        ReporteIngreso[] array = new Gson().fromJson(json, ReporteIngreso[].class);
+        
+        List<ReporteIngreso> list = Arrays.stream(array).collect(Collectors.toList());
+        return list;
+    }
+    
 }

@@ -20,5 +20,5 @@ public interface ICentral {
     public String editarSalidaCentral(String info);
     public String buscarMultas(String info);
     public String insertarUsuario(String info);
-    
+    public String buscarReporteIngresos(String info);
 }

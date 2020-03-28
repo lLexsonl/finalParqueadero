@@ -57,7 +57,7 @@ public class GUIClientesController extends AActionController {
                     tipo = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 5));
                     placa = String.valueOf(vista.getTblIngresoRetirar().getValueAt(index, 4));
 
-                    fingreso = Utilidades.fechaAcualConFormato();//"19/02/2020";
+                    fingreso = Utilidades.fechaAcualConFormato();
                     puesto = asignarPuesto(tipo);
                     System.out.println(puesto);
                     if (ingresoValido(id, placa)) {
@@ -65,6 +65,9 @@ public class GUIClientesController extends AActionController {
                             try {
                                 gestor.agregarIngresoCentral(placa, id, String.valueOf(puesto), fingreso);
                                 Utilidades.mensajeExito("Se registró el ingreso", "Ingreso");
+                                GUIReporte reporte = GUIReporte.getReporte();
+                                reporte.buscarReporte(placa);
+                                reporte.setVisible(true);
                             } catch (ClassNotFoundException | SQLException ex) {
                                 System.out.println(ex.getMessage());
                                 Utilidades.mensajeError("NO se pudo registrar el ingreso", "Ingreso");
@@ -213,9 +216,9 @@ public class GUIClientesController extends AActionController {
 
         try {
             List<Ingreso> list = gestor.buscarIngresosCentral();
-
-            ints.removeAll(list.stream().map(l -> l.getPuesto().split("_")[1]).collect(Collectors.toList()));
-
+            if (list != null) {
+                ints.removeAll(list.stream().map(l -> String.valueOf(Integer.parseInt(l.getPuesto().split("_")[1]))).collect(Collectors.toList()));
+            }
             //System.out.println(Arrays.toString(ints.toArray()));
             if (tipo.equals("MOTO")) {
                 ints.removeAll(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"));
@@ -236,11 +239,11 @@ public class GUIClientesController extends AActionController {
         try {
             List<Ingreso> list = gestor.buscarIngresosCentral();
 
-            if (!list.isEmpty()) {
+            if (list != null) {
                 for (Ingreso i : list) {
                     //System.out.println(String.format("IngresoValido: %s = %s, %s = %s", i.getId(), id, i.getPlaca(), placa));
                     if (i.getId().equals(id)
-                            && i.getPlaca().equals(placa)) {
+                            || i.getPlaca().equals(placa)) {
                         valido = false;
                     }
                 }

@@ -197,6 +197,9 @@ public class ServicioCentralSocket implements ICentral {
             case 14:
                 salidaDecorada.println("insertarUsuario," + id);
                 break;
+            case 15:
+                salidaDecorada.println("buscarReporteIngresos," + id);
+                break;
             default:
                 Utilidades.mensajeError("Opción NO valida", "Comunicación con el servidor");
                 break;
@@ -301,6 +304,20 @@ public class ServicioCentralSocket implements ICentral {
         try {
             conectar(IP_SERVIDOR, PUERTO);
             respuesta = leerFlujoEntradaSalida(info, 14);
+            cerrarFlujos();
+            desconectar();
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioCentralSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta; 
+    }
+
+    @Override
+    public String buscarReporteIngresos(String info) {
+        String respuesta = "";
+        try {
+            conectar(IP_SERVIDOR, PUERTO);
+            respuesta = leerFlujoEntradaSalida(info, 15);
             cerrarFlujos();
             desconectar();
         } catch (IOException ex) {

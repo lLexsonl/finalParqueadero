@@ -8,6 +8,7 @@ import parqueadero.negocio.GestorClientes;
 import parqueadero.presentacion.GUIClientesController;
 import parqueadero.presentacion.GUIMapaParqueadero;
 import parqueadero.presentacion.GUIPrincipal;
+import parqueadero.presentacion.GUIReporte;
 
 /**
  * Es el pegamento de la aplición
@@ -32,6 +33,7 @@ public class RunMVC {
         gestor.addView(mapa);
         gestor.notificar();
         mapa.setVisible(true);
+        
         /*
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
