@@ -21,4 +21,5 @@ public interface ICentral {
     public String buscarMultas(String info);
     public String insertarUsuario(String info);
     public String buscarReporteIngresos(String info);
+    public String generarReporteHorasIngreso(String info);
 }

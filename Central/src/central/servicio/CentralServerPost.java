@@ -269,6 +269,13 @@ public class CentralServerPost implements Runnable {
                     salidaDecorada.println("NO_ENCONTRADO");
                 }
                 break;
+            case "generarReporteHorasIngreso":
+                List<ReporteIngreso> reportes = gestor.generarReporteHorasIngreso();
+                if(!reportes.isEmpty()) {
+                    salidaDecorada.println(serializarReporte(reportes));
+                } else {
+                    salidaDecorada.println("NO_ENCONTRADO");
+                }
         }
     }
 

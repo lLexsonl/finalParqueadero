@@ -1,10 +1,19 @@
 package parqueadero.presentacion;
 
+import java.awt.Color;
 import java.util.Calendar;
+import java.util.List;
 import mvcf.AModel;
 import mvcf.AView;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.negocio.GestorVigilante;
+import parqueadero.negocio.ReporteIngreso;
 import parqueadero.utils.Utilidades;
 
 /**
@@ -12,7 +21,6 @@ import parqueadero.utils.Utilidades;
  * @author Usuario
  */
 public class GUIAdministrador extends javax.swing.JFrame implements AView {
-
     /**
      * Creates new form GUIAdministrador
      */
@@ -61,6 +69,10 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
         fechaNac = new com.toedter.calendar.JCalendar();
         jPanel6 = new javax.swing.JPanel();
         btnCrearVigi = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        pnlBotonGenerarReporte = new javax.swing.JPanel();
+        btnGenerarReporte = new javax.swing.JButton();
+        pnlPrincipalReporte = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -176,6 +188,23 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
 
         jTabbedPane1.addTab("Gestión Vigilante", jPanel7);
 
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        btnGenerarReporte.setText("Generar Reporte");
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+        pnlBotonGenerarReporte.add(btnGenerarReporte);
+
+        jPanel2.add(pnlBotonGenerarReporte, java.awt.BorderLayout.NORTH);
+
+        pnlPrincipalReporte.setLayout(new javax.swing.BoxLayout(pnlPrincipalReporte, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel2.add(pnlPrincipalReporte, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Reporte Horas Congestión", jPanel2);
+
         getContentPane().add(jTabbedPane1);
 
         pack();
@@ -202,14 +231,14 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
             return;
         }
 
-        String fechaNac = this.fechaNac.getCalendar().get(Calendar.DAY_OF_MONTH) + "-";
-        fechaNac += this.fechaNac.getCalendar().get(Calendar.MONTH) + "-";
-        fechaNac += this.fechaNac.getCalendar().get(Calendar.YEAR) + "";
+        String fechaNaci = this.fechaNac.getCalendar().get(Calendar.DAY_OF_MONTH) + "-";
+        fechaNaci += this.fechaNac.getCalendar().get(Calendar.MONTH) + "-";
+        fechaNaci += this.fechaNac.getCalendar().get(Calendar.YEAR) + "";
         GestorVigilante gestor = new GestorVigilante();
         GestorClientes gestorCli = new GestorClientes();
         String info;
 
-        info = String.format("%s,%s,%s,%s,%s,%s", numeroid, nombre, apellido, genero, fechaNac, rol);
+        info = String.format("%s,%s,%s,%s,%s,%s", numeroid, nombre, apellido, genero, fechaNaci, rol);
         String respuesta = gestorCli.IngresarClienteCentral(info);
         if(!respuesta.equals("OK")){
             Utilidades.mensajeError("Errror al intentar crear el vigilante", "Gestión Vegilante");
@@ -230,6 +259,31 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbMasculinoActionPerformed
 
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+
+        GestorVigilante gestor = new GestorVigilante();
+        List<ReporteIngreso> reportes = gestor.generarReporteHorasIngreso();
+        if (reportes != null) {
+            DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+            for (ReporteIngreso ingreso : reportes) {
+                dataSet.setValue(Double.parseDouble(ingreso.getCantidad()), "Hora de ingreso", ingreso.getFechaIngreso());
+            }
+            JFreeChart jchart = ChartFactory.createBarChart("Reporte de Ingresos Por Hora", "Horas de Ingreso", "Cantidad de ingresos", dataSet, PlotOrientation.VERTICAL, true, true, false);
+
+            CategoryPlot plot = jchart.getCategoryPlot();
+            plot.setRangeGridlinePaint(Color.BLACK);
+            
+            ChartPanel panel = new ChartPanel(jchart);
+            this.add(panel);
+
+            pnlPrincipalReporte.removeAll();
+            pnlPrincipalReporte.add(panel);
+            pnlPrincipalReporte.updateUI();
+        } else {
+            Utilidades.mensajeError("No se pudo generar el Reporte", "Generación del reporte");
+        }
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +291,7 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearVigi;
+    private javax.swing.JButton btnGenerarReporte;
     private javax.swing.ButtonGroup btnGroup1;
     private com.toedter.calendar.JCalendar fechaNac;
     private javax.swing.JLabel jLabel11;
@@ -244,6 +299,7 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -256,6 +312,8 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
     private javax.swing.JLabel lblIdent;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JPanel pnlBotonGenerarReporte;
+    private javax.swing.JPanel pnlPrincipalReporte;
     private javax.swing.JRadioButton rbFemenino;
     private javax.swing.JRadioButton rbMasculino;
     private javax.swing.JTextField txtApellido;

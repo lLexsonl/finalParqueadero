@@ -200,7 +200,7 @@ public class GestorClientePostgresql {
         
         connector.crearConsulta(String.format("select extract(dow from fechaingreso) as fechaingreso, count(*) as cant from ingreso\n" +
                                                 "where fechaingreso > current_date - 7 and placa_vehi = '%s'\n" +
-                                                "group by extract(dow from fechaingreso);", placa));
+                                                "group by extract(dow from fechaingreso) order by extract(dow from fechaingreso);", placa));
         
         List<ReporteIngreso> list = new ArrayList<>();
         
@@ -214,14 +214,22 @@ public class GestorClientePostgresql {
         return list;
     }
     
-    /*
-    public static void main(String[] args) {
-        GestorClientePostgresql gestor = new GestorClientePostgresql();
-        try{
-            gestor.agregarCliente("1111", "ALAN", "TURIN", "MASCULINO", "11-12-1980", "ADMINISTRADOR");
-            gestor.insertarUsuario("1111", "ALAN", "4321");
-        } catch(SQLException | ClassNotFoundException e){
-            System.out.println(e.getMessage());
+    public List<ReporteIngreso> generarReporteHorasIngreso() throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        
+        connector.crearConsulta(String.format("select extract(hour from fechaingreso) as fechaingreso, count(*) cant from ingreso\n" +
+"group by extract(hour from fechaingreso)\n" +
+"order by extract(hour from fechaingreso);"));
+        
+        List<ReporteIngreso> list = new ArrayList<>();
+        
+        while(connector.getResultado().next()) {
+            ReporteIngreso reporte = new ReporteIngreso(
+                    connector.getResultado().getString("fechaingreso"),
+                    connector.getResultado().getString("cant"));
+            list.add(reporte);
         }
-    }*/
+        connector.desconectarse();
+        return list;
+    }
 }

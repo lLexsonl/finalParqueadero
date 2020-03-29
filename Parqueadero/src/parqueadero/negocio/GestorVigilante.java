@@ -6,9 +6,10 @@
 package parqueadero.negocio;
 
 import com.google.gson.Gson;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 import mvcf.AModel;
 import parqueadero.acceso.ICentral;
 import parqueadero.acceso.ServicioCentralSocket;
@@ -50,5 +51,20 @@ public class GestorVigilante extends AModel {
         usu.setId_cli(properties.getProperty("id_cli"));
         usu.setUser_usu(properties.getProperty("user_usu"));
         usu.setPass_usu(properties.getProperty("pass_usu"));
+    }
+    
+    public List<ReporteIngreso> generarReporteHorasIngreso() {
+        String json = Central.generarReporteHorasIngreso("");
+        if(!json.equals("NO_ENCONTRADO")){
+         return deserializarReporte(json);
+        }
+        return null;
+    }
+    
+    private List<ReporteIngreso> deserializarReporte(String json) {
+        ReporteIngreso[] array = new Gson().fromJson(json, ReporteIngreso[].class);
+        
+        List<ReporteIngreso> list = Arrays.stream(array).collect(Collectors.toList());
+        return list;
     }
 }
