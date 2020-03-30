@@ -7,6 +7,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.negocio.ReporteIngreso;
@@ -106,7 +108,8 @@ public class GUIReporte extends javax.swing.JFrame {
             DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
             for (ReporteIngreso ingreso : reportes) {
                 dia = elegirDia(ingreso.getFechaIngreso());
-                dataSet.setValue(Double.parseDouble(ingreso.getCantidad()), "Dia de la semana", dia);
+                dataSet.addValue(Double.parseDouble(ingreso.getCantidad()), "Dia de la semana", dia);
+                //dataSet.setValue(Double.parseDouble(ingreso.getCantidad()), "Dia de la semana", dia);
             }
             JFreeChart jchart = ChartFactory.createBarChart("Reporte Ingresos", "Fecha Ingreso", "Cantidad", dataSet, PlotOrientation.VERTICAL, true, true, false);
 
@@ -114,7 +117,6 @@ public class GUIReporte extends javax.swing.JFrame {
             plot.setRangeGridlinePaint(Color.BLACK);
             
             ChartPanel panel = new ChartPanel(jchart);
-            this.add(panel);
 
             pnlPrincipal.removeAll();
             pnlPrincipal.add(panel);

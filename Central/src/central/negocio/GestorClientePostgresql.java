@@ -170,7 +170,7 @@ public class GestorClientePostgresql {
     
     public List<Multa> buscarMultas(String placa) throws ClassNotFoundException, SQLException {
         connector.conectarse();
-        connector.crearConsulta(String.format("SELECT * FROM MULTA WHERE PLACA_VEHI='%s'", placa));
+        connector.crearConsulta(String.format("SELECT * FROM MULTA WHERE PLACA_VEHI='%s' AND ESTADO_MUL = 'DEBE'", placa));
         
         List<Multa> list = new ArrayList<>();
         while(connector.getResultado().next()) {
@@ -189,7 +189,6 @@ public class GestorClientePostgresql {
     }
     
     public void insertarUsuario(String id, String user, String pass) throws ClassNotFoundException, SQLException {
-        System.out.println("insertar usario: " + id + user + pass);
         connector.conectarse();
         connector.actualizar(String.format("INSERT INTO USUARIO VALUES ('%s','%s','%s')", id, user, pass));
         connector.desconectarse();
@@ -231,5 +230,11 @@ public class GestorClientePostgresql {
         }
         connector.desconectarse();
         return list;
+    }
+    
+    public void pagarMulta(String numeroMulta) throws ClassNotFoundException, SQLException {
+        connector.conectarse();
+        connector.actualizar(String.format("update multa set estado_mul = 'PAGADO' where nomulta = %s", numeroMulta));
+        connector.desconectarse();
     }
 }

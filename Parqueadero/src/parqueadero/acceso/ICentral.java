@@ -22,4 +22,5 @@ public interface ICentral {
     public String insertarUsuario(String info);
     public String buscarReporteIngresos(String info);
     public String generarReporteHorasIngreso(String info);
+    public String pagarMulta(String info);
 }

@@ -162,14 +162,15 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jPanel36 = new javax.swing.JPanel();
         btn_multa = new javax.swing.JButton();
         pnlPagarMulta = new javax.swing.JPanel();
-        lblBuscarMulta = new javax.swing.JLabel();
         jPanel37 = new javax.swing.JPanel();
         lblBuscarMultaPlaca = new javax.swing.JLabel();
         txtBuscarMultaPlaca = new javax.swing.JTextField();
         btnBuscarMulta = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMultas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnBotonPagarM = new javax.swing.JButton();
+        btnCerrarM = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -190,10 +191,12 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton1.setText("Busqueda por Cedula");
         jRadioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel5.add(jRadioButton1);
 
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton2.setText("Busqueda por código");
         jRadioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel5.add(jRadioButton2);
@@ -202,6 +205,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel6.setLayout(new java.awt.GridLayout(1, 0));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Numero de identificación:");
         jPanel6.add(jLabel2);
         jPanel6.add(txtId);
@@ -284,6 +288,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         pnlCrearUsuId.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        lblCrearUsuId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCrearUsuId.setText("Identificación:");
         pnlCrearUsuId.add(lblCrearUsuId);
 
@@ -298,12 +303,14 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 18, 5));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Nombre :");
         jPanel14.add(jLabel5);
 
         txtCrearCliNombre.setPreferredSize(new java.awt.Dimension(250, 50));
         jPanel14.add(txtCrearCliNombre);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Apellido:");
         jPanel14.add(jLabel4);
 
@@ -314,12 +321,15 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Sexo:");
         jPanel15.add(jLabel6);
 
+        Femenino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Femenino.setText("Femenino");
         jPanel15.add(Femenino);
 
+        Masculino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Masculino.setText("Masculino");
         jPanel15.add(Masculino);
 
@@ -331,15 +341,18 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 18, 5));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Rol:");
         jPanel17.add(jLabel7);
 
-        roling.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "estudiante", "docente", "administrativo" }));
+        roling.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        roling.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Docente", "Administrativo" }));
         roling.setPreferredSize(new java.awt.Dimension(150, 50));
         jPanel17.add(roling);
 
         jPanel16.add(jPanel17);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Fecha de nacimiento:");
         jPanel16.add(jLabel8);
         jPanel16.add(FechaCli);
@@ -582,14 +595,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         pnlPagarMulta.setLayout(new java.awt.BorderLayout());
 
-        lblBuscarMulta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblBuscarMulta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBuscarMulta.setText("Buscar MULTA");
-        lblBuscarMulta.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        pnlPagarMulta.add(lblBuscarMulta, java.awt.BorderLayout.NORTH);
-
-        jPanel37.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel37.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 15));
+        jPanel37.setPreferredSize(new java.awt.Dimension(200, 70));
 
         lblBuscarMultaPlaca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblBuscarMultaPlaca.setText("Ingrese la PLACA:");
@@ -598,12 +604,13 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         txtBuscarMultaPlaca.setPreferredSize(new java.awt.Dimension(200, 50));
         jPanel37.add(txtBuscarMultaPlaca);
 
-        btnBuscarMulta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnBuscarMulta.setText("BUSCAR");
-        btnBuscarMulta.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnBuscarMulta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBuscarMulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
+        btnBuscarMulta.setText("Buscar MULTAS");
+        btnBuscarMulta.setPreferredSize(new java.awt.Dimension(200, 50));
         jPanel37.add(btnBuscarMulta);
 
-        pnlPagarMulta.add(jPanel37, java.awt.BorderLayout.CENTER);
+        pnlPagarMulta.add(jPanel37, java.awt.BorderLayout.NORTH);
 
         jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 300));
 
@@ -620,21 +627,29 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         ));
         jScrollPane2.setViewportView(tblMultas);
 
-        pnlPagarMulta.add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
+        pnlPagarMulta.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        btnBotonPagarM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBotonPagarM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/recibo-entrada.png"))); // NOI18N
+        btnBotonPagarM.setText("Pagar MULTA");
+        btnBotonPagarM.setPreferredSize(new java.awt.Dimension(200, 35));
+        jPanel1.add(btnBotonPagarM);
+
+        pnlPagarMulta.add(jPanel1, java.awt.BorderLayout.SOUTH);
 
         tbpMultas.addTab("Pagar Multa", pnlPagarMulta);
 
         jPanel32.add(tbpMultas, java.awt.BorderLayout.CENTER);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cerrar.png"))); // NOI18N
-        jButton1.setText("CERRAR");
-        jButton1.setPreferredSize(new java.awt.Dimension(100, 50));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cerrar.png"))); // NOI18N
+        btnCerrarM.setText("CERRAR");
+        btnCerrarM.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnCerrarM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCerrarMActionPerformed(evt);
             }
         });
-        jPanel32.add(jButton1, java.awt.BorderLayout.SOUTH);
+        jPanel32.add(btnCerrarM, java.awt.BorderLayout.SOUTH);
 
         jTabbedPane1.addTab("Gestión de Multas", jPanel32);
 
@@ -809,10 +824,10 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
     }//GEN-LAST:event_btnAsociacionActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCerrarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarMActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCerrarMActionPerformed
 
     public boolean validarFormulario() {
         if (this.getId().equals("")) {
@@ -1015,15 +1030,16 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JTextField Placatxt;
     private javax.swing.JComboBox<String> TipoCBox;
     private javax.swing.JButton btnAsociacion;
+    private javax.swing.JButton btnBotonPagarM;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarMulta;
+    private javax.swing.JButton btnCerrarM;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btn_multa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private com.toedter.calendar.JCalendar calendar_multa;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1048,6 +1064,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -1089,7 +1106,6 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblBuscarMulta;
     private javax.swing.JLabel lblBuscarMultaPlaca;
     private javax.swing.JLabel lblCrearUsuId;
     private javax.swing.JLabel lblNoMulta;
@@ -1156,5 +1172,12 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
     public void setAccion(String accion) {
         this.accion = accion;
+    }
+    public JButton getBtnBotonPagarM() {
+        return btnBotonPagarM;
+    }
+    
+    public JTable getTblMultas() {
+        return tblMultas;
     }
 }

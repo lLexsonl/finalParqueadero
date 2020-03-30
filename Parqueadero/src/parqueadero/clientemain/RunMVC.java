@@ -65,6 +65,9 @@ public class RunMVC {
         
         view1.getBtnBuscarMulta().addActionListener(control);
         view1.getBtnBuscarMulta().setActionCommand("BUSCAR_MULTA");
+        
+        view1.getBtnBotonPagarM().addActionListener(control);
+        view1.getBtnBotonPagarM().setActionCommand("PAGAR_MULTA");
     }
 }
 

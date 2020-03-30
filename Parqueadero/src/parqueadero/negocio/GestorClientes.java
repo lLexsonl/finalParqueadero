@@ -365,4 +365,8 @@ public class GestorClientes extends AModel {
         return list;
     }
     
+    public String pagarMulta(String numeroMulta) {
+        return central.pagarMulta(numeroMulta);
+    }
+    
 }

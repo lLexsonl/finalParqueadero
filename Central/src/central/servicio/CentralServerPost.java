@@ -276,6 +276,11 @@ public class CentralServerPost implements Runnable {
                 } else {
                     salidaDecorada.println("NO_ENCONTRADO");
                 }
+                break;
+            case "pagarMulta":
+                gestor.pagarMulta(parametros[1]);
+                salidaDecorada.println("OK");
+                break;
         }
     }
 

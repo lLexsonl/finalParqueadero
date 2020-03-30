@@ -151,19 +151,43 @@ public class GUIClientesController extends AActionController {
                 break;
                 //</editor-fold>
             case "BUSCAR_MULTA":
+                //<editor-fold defaultstate="collapsed" desc="Funcionalidad BuscarMulta">
+                
                 System.out.println("Estoy en buscar multa");
                 
                 String placa_multa = vista.getTxtBuscarMultaPlaca().trim().toUpperCase();
                 
                 List<Multa> list = gestor.buscarMultas(placa_multa);
                 
-                if(list != null &&!list.isEmpty()) {
+                if(list != null) {
                     Utilidades.mensajeExito("Se encotraron multas asociadas al vehiculo", "Buscar Multas");
                     vista.fijarCamposTablaMulta(list);
                 } else {
                     Utilidades.mensajeExito("NO se encotraron multas asociadas al vehiculo", "Buscar Multas");
                 }
                 break;
+//</editor-fold>
+            case "PAGAR_MULTA":
+                //<editor-fold defaultstate="collapsed" desc="Funcionalida pagarMulta">
+                
+                int indexM = vista.getTblMultas().getSelectedRow();
+                if (indexM != -1) {
+                    String numeroMulta, respuesta;
+                    
+                    numeroMulta = String.valueOf(vista.getTblMultas().getValueAt(indexM, 0));
+                    
+                    respuesta = gestor.pagarMulta(numeroMulta);
+                    
+                    if(respuesta.equals("OK")) {
+                        Utilidades.mensajeExito("Se pagó la multa", "Pago de MULTA");
+                    } else {
+                        Utilidades.mensajeExito("NO se logró pagar la multa", "Pago de MULTA");
+                    }
+                } else {
+                    Utilidades.mensajeAdvertencia("NO ha seleccionado una tupla", "Pago de MULTA");
+                }
+                break;
+//</editor-fold>
         }
     }
 
