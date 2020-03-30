@@ -5,7 +5,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Mapa"/>
     <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
-      <Point value="[750, 200]"/>
+      <Point value="[750, 50]"/>
     </Property>
   </Properties>
   <SyntheticProperties>

@@ -1,14 +1,12 @@
 package parqueadero.presentacion;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import mvcf.AModel;
 import mvcf.AView;
@@ -19,7 +17,6 @@ import parqueadero.negocio.GestorClienteVehiculo;
 import parqueadero.negocio.GestorClientes;
 import parqueadero.negocio.GestorVehiculo;
 import parqueadero.negocio.Multa;
-import parqueadero.negocio.Vehiculo;
 import parqueadero.negocio.VehiculoPost;
 import parqueadero.utils.Utilidades;
 
@@ -34,8 +31,8 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     public GUIPrincipal() {
         initComponents();
 
-        super.setSize(770, 650);
-        super.setLocation(50, 70);
+        super.setSize(750, 650);
+        super.setLocation(10, 50);
         inicializarTabla();
         inicializarTabla2();
         //fijarMensajeExplicacion();
@@ -89,33 +86,33 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         tblIngresoRetirar = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
         pnlCrearUsuId = new javax.swing.JPanel();
         lblCrearUsuId = new javax.swing.JLabel();
         txtCrearUsuId = new javax.swing.JTextField();
-        jPanel20 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCrearCliNombre = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtCrearCliApe = new javax.swing.JTextField();
         jPanel15 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         Femenino = new javax.swing.JRadioButton();
         Masculino = new javax.swing.JRadioButton();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         roling = new javax.swing.JComboBox<>();
+        jPanel16 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         FechaCli = new com.toedter.calendar.JCalendar();
         jPanel21 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel22 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         Marcatxt = new javax.swing.JTextField();
@@ -135,6 +132,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jPanel31 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtIdClienteAsoc = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -189,34 +187,46 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         jLabel1.setText("PARQUEADERO UNIVERSIDAD DEL CAUCA");
         jPanel3.add(jLabel1);
 
-        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton1.setText("Busqueda por Cedula");
         jRadioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel5.add(jRadioButton1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        jPanel5.add(jRadioButton1, gridBagConstraints);
 
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jRadioButton2.setText("Busqueda por código");
+        jRadioButton2.setText("Busqueda por Código");
         jRadioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel5.add(jRadioButton2);
+        jPanel5.add(jRadioButton2, new java.awt.GridBagConstraints());
 
         jPanel3.add(jPanel5);
 
-        jPanel6.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Numero de identificación:");
-        jPanel6.add(jLabel2);
-        jPanel6.add(txtId);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel6.add(jLabel2, gridBagConstraints);
 
+        txtId.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtId.setPreferredSize(new java.awt.Dimension(250, 40));
+        jPanel6.add(txtId, new java.awt.GridBagConstraints());
+
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setPreferredSize(new java.awt.Dimension(150, 40));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel6.add(btnBuscar);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel6.add(btnBuscar, gridBagConstraints);
 
         jPanel3.add(jPanel6);
 
@@ -273,161 +283,200 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jTabbedPane1.addTab("Gestión Parqueadero", jPanel2);
 
-        jPanel9.setLayout(new java.awt.GridLayout(4, 0));
-
-        jPanel19.setLayout(new java.awt.GridLayout(2, 0));
-
-        jPanel10.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel9.setLayout(new java.awt.BorderLayout());
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Gestión Usuarios");
-        jPanel10.add(jLabel3);
+        jPanel19.add(jLabel3);
 
-        jPanel19.add(jPanel10);
+        jPanel9.add(jPanel19, java.awt.BorderLayout.NORTH);
 
-        pnlCrearUsuId.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel20.setLayout(new java.awt.GridBagLayout());
 
-        lblCrearUsuId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pnlCrearUsuId.setLayout(new java.awt.GridBagLayout());
+
+        lblCrearUsuId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblCrearUsuId.setText("Identificación:");
-        pnlCrearUsuId.add(lblCrearUsuId);
+        pnlCrearUsuId.add(lblCrearUsuId, new java.awt.GridBagConstraints());
 
-        txtCrearUsuId.setPreferredSize(new java.awt.Dimension(250, 50));
-        pnlCrearUsuId.add(txtCrearUsuId);
+        txtCrearUsuId.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtCrearUsuId.setPreferredSize(new java.awt.Dimension(250, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 11, 5, 0);
+        pnlCrearUsuId.add(txtCrearUsuId, gridBagConstraints);
 
-        jPanel19.add(pnlCrearUsuId);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel20.add(pnlCrearUsuId, gridBagConstraints);
 
-        jPanel9.add(jPanel19);
+        jPanel14.setLayout(new java.awt.GridBagLayout());
 
-        jPanel20.setLayout(new java.awt.GridLayout(2, 0));
-
-        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 18, 5));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Nombre :");
-        jPanel14.add(jLabel5);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 43);
+        jPanel14.add(jLabel5, gridBagConstraints);
 
-        txtCrearCliNombre.setPreferredSize(new java.awt.Dimension(250, 50));
-        jPanel14.add(txtCrearCliNombre);
+        txtCrearCliNombre.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtCrearCliNombre.setPreferredSize(new java.awt.Dimension(250, 40));
+        jPanel14.add(txtCrearCliNombre, new java.awt.GridBagConstraints());
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel20.add(jPanel14, gridBagConstraints);
+
+        jPanel10.setLayout(new java.awt.GridBagLayout());
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Apellido:");
-        jPanel14.add(jLabel4);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel10.add(jLabel4, gridBagConstraints);
 
-        txtCrearCliApe.setPreferredSize(new java.awt.Dimension(250, 50));
-        jPanel14.add(txtCrearCliApe);
+        txtCrearCliApe.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtCrearCliApe.setPreferredSize(new java.awt.Dimension(250, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 44, 0, 0);
+        jPanel10.add(txtCrearCliApe, gridBagConstraints);
 
-        jPanel20.add(jPanel14);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel20.add(jPanel10, gridBagConstraints);
 
-        jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+        jPanel15.setLayout(new java.awt.GridBagLayout());
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Sexo:");
-        jPanel15.add(jLabel6);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel15.add(jLabel6, gridBagConstraints);
 
         Femenino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Femenino.setText("Femenino");
-        jPanel15.add(Femenino);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel15.add(Femenino, gridBagConstraints);
 
         Masculino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Masculino.setText("Masculino");
-        jPanel15.add(Masculino);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel15.add(Masculino, gridBagConstraints);
 
-        jPanel20.add(jPanel15);
-
-        jPanel9.add(jPanel20);
-
-        jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
-
-        jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 18, 5));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Rol:");
-        jPanel17.add(jLabel7);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 5);
+        jPanel15.add(jLabel7, gridBagConstraints);
 
         roling.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         roling.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Docente", "Administrativo" }));
         roling.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel17.add(roling);
+        jPanel15.add(roling, new java.awt.GridBagConstraints());
 
-        jPanel16.add(jPanel17);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 1);
+        jPanel20.add(jPanel15, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Fecha de nacimiento:");
         jPanel16.add(jLabel8);
         jPanel16.add(FechaCli);
 
-        jPanel9.add(jPanel16);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel20.add(jPanel16, gridBagConstraints);
 
-        jPanel21.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
+        jPanel9.add(jPanel20, java.awt.BorderLayout.CENTER);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/grabar.png"))); // NOI18N
         jButton3.setText("Registrar");
         jButton3.setMinimumSize(new java.awt.Dimension(20, 7));
-        jButton3.setPreferredSize(new java.awt.Dimension(150, 50));
+        jButton3.setPreferredSize(new java.awt.Dimension(150, 40));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel18.add(jButton3);
+        jPanel21.add(jButton3);
 
-        jPanel21.add(jPanel18);
-
-        jPanel9.add(jPanel21);
+        jPanel9.add(jPanel21, java.awt.BorderLayout.SOUTH);
 
         jTabbedPane1.addTab("Gestión Usuarios", jPanel9);
 
-        jPanel22.setLayout(new java.awt.GridLayout(6, 1));
-
-        jPanel23.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel22.setLayout(new java.awt.BorderLayout());
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Gestión Vehiculos");
+        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel9.setVerifyInputWhenFocusTarget(false);
         jPanel23.add(jLabel9);
 
-        jPanel22.add(jPanel23);
+        jPanel22.add(jPanel23, java.awt.BorderLayout.NORTH);
+
+        jPanel11.setLayout(new java.awt.GridBagLayout());
 
         jPanel25.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel25.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Marca:");
+        jLabel11.setPreferredSize(new java.awt.Dimension(50, 40));
         jPanel25.add(jLabel11);
 
+        Marcatxt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Marcatxt.setMinimumSize(new java.awt.Dimension(50, 30));
         Marcatxt.setPreferredSize(new java.awt.Dimension(200, 50));
         jPanel25.add(Marcatxt);
 
-        jPanel22.add(jPanel25);
-
-        jPanel24.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel11.add(jPanel25, gridBagConstraints);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Placa:");
+        jLabel10.setPreferredSize(new java.awt.Dimension(50, 40));
         jPanel24.add(jLabel10);
 
+        Placatxt.setMinimumSize(new java.awt.Dimension(50, 30));
         Placatxt.setPreferredSize(new java.awt.Dimension(200, 50));
         jPanel24.add(Placatxt);
 
-        jPanel22.add(jPanel24);
-
-        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel11.add(jPanel24, gridBagConstraints);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Color:");
+        jLabel16.setPreferredSize(new java.awt.Dimension(50, 40));
         jPanel13.add(jLabel16);
 
+        txtColorVehi.setMinimumSize(new java.awt.Dimension(50, 30));
         txtColorVehi.setPreferredSize(new java.awt.Dimension(200, 50));
         jPanel13.add(txtColorVehi);
 
-        jPanel22.add(jPanel13);
-
-        jPanel26.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel11.add(jPanel13, gridBagConstraints);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Tipo:");
+        jLabel12.setPreferredSize(new java.awt.Dimension(50, 40));
         jPanel26.add(jLabel12);
 
         TipoCBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -435,7 +484,12 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         TipoCBox.setPreferredSize(new java.awt.Dimension(100, 50));
         jPanel26.add(TipoCBox);
 
-        jPanel22.add(jPanel26);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel11.add(jPanel26, gridBagConstraints);
+
+        jPanel22.add(jPanel11, java.awt.BorderLayout.CENTER);
 
         jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
@@ -450,9 +504,9 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         });
         jPanel27.add(jButton5);
 
-        jPanel22.add(jPanel27);
+        jPanel22.add(jPanel27, java.awt.BorderLayout.SOUTH);
 
-        jTabbedPane1.addTab("Gestión Vehiculos", jPanel22);
+        jTabbedPane2.addTab("Gestión Vehiculos", jPanel22);
 
         jPanel28.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -469,21 +523,48 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel30.setLayout(new java.awt.GridBagLayout());
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Número de identificación:");
-        jPanel30.add(jLabel14, new java.awt.GridBagConstraints());
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel18.setText("Asociar un Vehiculo a un Cliente");
+        jLabel18.setPreferredSize(new java.awt.Dimension(260, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipady = 80;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 1);
+        jPanel30.add(jLabel18, gridBagConstraints);
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("Número de identificación:");
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel14.setPreferredSize(new java.awt.Dimension(160, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        jPanel30.add(jLabel14, gridBagConstraints);
+
+        txtIdClienteAsoc.setMinimumSize(new java.awt.Dimension(50, 30));
         txtIdClienteAsoc.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel30.add(txtIdClienteAsoc, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel30.add(txtIdClienteAsoc, gridBagConstraints);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Placa de Vehiculo:");
+        jLabel13.setPreferredSize(new java.awt.Dimension(150, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jPanel30.add(jLabel13, gridBagConstraints);
 
         txtPlacaAsoc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPlacaAsoc.setMinimumSize(new java.awt.Dimension(50, 30));
         txtPlacaAsoc.setPreferredSize(new java.awt.Dimension(200, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -510,7 +591,9 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         jPanel28.add(jPanel29);
 
-        jTabbedPane1.addTab("Gestión Asociación", jPanel28);
+        jTabbedPane2.addTab("Gestión Asociación", jPanel28);
+
+        jTabbedPane1.addTab("Gestión Vehiculo", jTabbedPane2);
 
         jPanel32.setLayout(new java.awt.BorderLayout());
 
@@ -529,39 +612,49 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
 
         lblNoMulta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNoMulta.setText("Número multa:");
+        lblNoMulta.setPreferredSize(new java.awt.Dimension(120, 30));
         jPanel38.add(lblNoMulta, new java.awt.GridBagConstraints());
 
         txtNoMulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNoMulta.setPreferredSize(new java.awt.Dimension(200, 30));
-        jPanel38.add(txtNoMulta, new java.awt.GridBagConstraints());
+        txtNoMulta.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtNoMulta.setPreferredSize(new java.awt.Dimension(200, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 0);
+        jPanel38.add(txtNoMulta, gridBagConstraints);
 
         lbl_placa_mul.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_placa_mul.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_placa_mul.setText("Placa:");
+        lbl_placa_mul.setPreferredSize(new java.awt.Dimension(120, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         jPanel38.add(lbl_placa_mul, gridBagConstraints);
 
         txt_placa_mul.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_placa_mul.setPreferredSize(new java.awt.Dimension(200, 30));
+        txt_placa_mul.setMinimumSize(new java.awt.Dimension(50, 30));
+        txt_placa_mul.setPreferredSize(new java.awt.Dimension(200, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 0);
         jPanel38.add(txt_placa_mul, gridBagConstraints);
 
         lbl_des_multa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_des_multa.setText("Descripción:");
+        lbl_des_multa.setPreferredSize(new java.awt.Dimension(120, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         jPanel38.add(lbl_des_multa, gridBagConstraints);
 
         txt_des_mul.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_des_mul.setPreferredSize(new java.awt.Dimension(200, 30));
+        txt_des_mul.setMinimumSize(new java.awt.Dimension(50, 30));
+        txt_des_mul.setPreferredSize(new java.awt.Dimension(200, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 0);
         jPanel38.add(txt_des_mul, gridBagConstraints);
 
         jPanel35.add(jPanel38);
@@ -572,7 +665,8 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
         lbl_url_multa.setText("URL Foto:");
         jPanel39.add(lbl_url_multa);
 
-        txt_url_multa.setPreferredSize(new java.awt.Dimension(200, 30));
+        txt_url_multa.setMinimumSize(new java.awt.Dimension(50, 30));
+        txt_url_multa.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel39.add(txt_url_multa);
 
         lbl_fecha_mul.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -1052,6 +1146,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1066,12 +1161,11 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -1106,6 +1200,7 @@ public class GUIPrincipal extends javax.swing.JFrame implements AView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblBuscarMultaPlaca;
     private javax.swing.JLabel lblCrearUsuId;
     private javax.swing.JLabel lblNoMulta;

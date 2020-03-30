@@ -26,7 +26,7 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
      */
     public GUIAdministrador() {
         this.initComponents();
-        super.setSize(600, 600);
+        super.setSize(700, 600);
         super.setLocationRelativeTo(null);
         btnGroup1.add(rbFemenino);
         btnGroup1.add(rbMasculino);
@@ -41,11 +41,11 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         btnGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblIdent = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -54,16 +54,15 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
         txtNombre = new javax.swing.JTextField();
         lblApellido = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        lblGeneroU = new javax.swing.JLabel();
-        rbFemenino = new javax.swing.JRadioButton();
-        rbMasculino = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         lblUser = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
+        jPanel4 = new javax.swing.JPanel();
+        lblGeneroU = new javax.swing.JLabel();
+        rbFemenino = new javax.swing.JRadioButton();
+        rbMasculino = new javax.swing.JRadioButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         fechaNac = new com.toedter.calendar.JCalendar();
@@ -76,62 +75,116 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
-        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel7.setMinimumSize(new java.awt.Dimension(20, 7));
-        jPanel7.setLayout(new java.awt.GridLayout(4, 0));
+        jPanel7.setPreferredSize(new java.awt.Dimension(600, 600));
+        jPanel7.setLayout(new java.awt.GridBagLayout());
 
-        jPanel10.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel10.setLayout(new java.awt.GridLayout(2, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 50));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(450, 55));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
-
-        lblIdent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIdent.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblIdent.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblIdent.setText("Identificación:");
         lblIdent.setToolTipText("");
         lblIdent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblIdent.setPreferredSize(new java.awt.Dimension(80, 50));
-        jPanel1.add(lblIdent);
+        lblIdent.setPreferredSize(new java.awt.Dimension(110, 50));
+        jPanel1.add(lblIdent, new java.awt.GridBagConstraints());
 
         txtId.setText(" ");
         txtId.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel1.add(txtId);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel1.add(txtId, gridBagConstraints);
 
-        jPanel10.add(jPanel1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel7.add(jPanel1, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 25, 5));
+        jPanel3.setPreferredSize(new java.awt.Dimension(600, 50));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
+        lblNombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombre.setText("Nombre:");
         lblNombre.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblNombre.setPreferredSize(new java.awt.Dimension(110, 50));
         lblNombre.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jPanel3.add(lblNombre);
+        jPanel3.add(lblNombre, new java.awt.GridBagConstraints());
 
         txtNombre.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel3.add(txtNombre);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel3.add(txtNombre, gridBagConstraints);
 
+        lblApellido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblApellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblApellido.setText("Apellido:");
-        jPanel3.add(lblApellido);
+        lblApellido.setPreferredSize(new java.awt.Dimension(110, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel3.add(lblApellido, gridBagConstraints);
 
+        txtApellido.setMinimumSize(new java.awt.Dimension(50, 30));
         txtApellido.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel3.add(txtApellido);
+        jPanel3.add(txtApellido, new java.awt.GridBagConstraints());
 
-        jPanel10.add(jPanel3);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel7.add(jPanel3, gridBagConstraints);
 
-        jPanel7.add(jPanel10);
+        jPanel5.setPreferredSize(new java.awt.Dimension(600, 50));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        jPanel11.setLayout(new java.awt.GridLayout(2, 0));
+        lblUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUser.setText("User:");
+        lblUser.setPreferredSize(new java.awt.Dimension(110, 50));
+        jPanel5.add(lblUser, new java.awt.GridBagConstraints());
 
-        jPanel4.setPreferredSize(new java.awt.Dimension(400, 50));
+        txtUser.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtUser.setPreferredSize(new java.awt.Dimension(150, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel5.add(txtUser, gridBagConstraints);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Clave Acceso:");
+        jLabel13.setPreferredSize(new java.awt.Dimension(110, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel5.add(jLabel13, gridBagConstraints);
+
+        txtPass.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        txtPass.setMinimumSize(new java.awt.Dimension(50, 30));
+        txtPass.setPreferredSize(new java.awt.Dimension(150, 50));
+        jPanel5.add(txtPass, new java.awt.GridBagConstraints());
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel7.add(jPanel5, gridBagConstraints);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(600, 50));
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
 
+        lblGeneroU.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblGeneroU.setText("Género:");
         jPanel4.add(lblGeneroU);
 
+        rbFemenino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbFemenino.setText("Femenino");
         jPanel4.add(rbFemenino);
 
+        rbMasculino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbMasculino.setText("Masculino");
         rbMasculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,43 +193,33 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
         });
         jPanel4.add(rbMasculino);
 
-        jPanel11.add(jPanel4);
-
-        lblUser.setText("User:");
-        jPanel5.add(lblUser);
-
-        txtUser.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel5.add(txtUser);
-
-        jLabel13.setText("Clave Acceso:");
-        jPanel5.add(jLabel13);
-
-        txtPass.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        txtPass.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel5.add(txtPass);
-
-        jPanel11.add(jPanel5);
-
-        jPanel7.add(jPanel11);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel7.add(jPanel4, gridBagConstraints);
 
         jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 25, 5));
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Fecha de Nacimiento:");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel9.add(jLabel11);
 
         fechaNac.setMinimumSize(new java.awt.Dimension(20, 7));
-        fechaNac.setPreferredSize(new java.awt.Dimension(300, 150));
+        fechaNac.setPreferredSize(new java.awt.Dimension(253, 150));
         jPanel9.add(fechaNac);
 
-        jPanel7.add(jPanel9);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel7.add(jPanel9, gridBagConstraints);
 
-        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25));
-
-        btnCrearVigi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCrearVigi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCrearVigi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/vigilante.png"))); // NOI18N
         btnCrearVigi.setText("Crear Vigilante");
-        btnCrearVigi.setPreferredSize(new java.awt.Dimension(150, 50));
+        btnCrearVigi.setPreferredSize(new java.awt.Dimension(200, 50));
         btnCrearVigi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearVigiActionPerformed(evt);
@@ -184,13 +227,19 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
         });
         jPanel6.add(btnCrearVigi);
 
-        jPanel7.add(jPanel6);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        jPanel7.add(jPanel6, gridBagConstraints);
 
         jTabbedPane1.addTab("Gestión Vigilante", jPanel7);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        btnGenerarReporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reporte .png"))); // NOI18N
         btnGenerarReporte.setText("Generar Reporte");
+        btnGenerarReporte.setPreferredSize(new java.awt.Dimension(200, 40));
         btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarReporteActionPerformed(evt);
@@ -268,7 +317,7 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
             for (ReporteIngreso ingreso : reportes) {
                 dataSet.setValue(Double.parseDouble(ingreso.getCantidad()), "Hora de ingreso", ingreso.getFechaIngreso());
             }
-            JFreeChart jchart = ChartFactory.createBarChart("Reporte de Ingresos Por Hora", "Horas de Ingreso", "Cantidad de ingresos", dataSet, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart jchart = ChartFactory.createBarChart("Reporte de Ingresos Por Hora", "", "Cantidad de ingresos", dataSet, PlotOrientation.VERTICAL, true, true, false);
 
             CategoryPlot plot = jchart.getCategoryPlot();
             plot.setRangeGridlinePaint(Color.BLACK);
@@ -297,8 +346,6 @@ public class GUIAdministrador extends javax.swing.JFrame implements AView {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

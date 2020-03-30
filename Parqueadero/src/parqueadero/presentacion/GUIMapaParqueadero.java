@@ -133,7 +133,7 @@ public class GUIMapaParqueadero extends javax.swing.JFrame implements AView {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mapa");
-        setLocation(new java.awt.Point(750, 200));
+        setLocation(new java.awt.Point(750, 50));
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         pnlMapa.setPreferredSize(new java.awt.Dimension(600, 500));
